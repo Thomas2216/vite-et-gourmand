@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du menu{% endblock %}
+
+{% block body %}
+    <h1>Détail du {{ menu.titre }}</h1>
+
+    <div class="container mt-5">
+        {% if menu.plats|length > 0 %}
+            <table class="table menu-table">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Nom</th>
+                    <th>Allergène</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for plat in menu.plats %}
+                    <tr>
+                        <td>{{ plat.type }}</td>
+                        <td>{{ plat.nom }}</td>
+                        <td>
+                            {{ plat.allergene ?: '—' }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucun plat associé à ce menu.</p>
+        {% endif %}
+
+        <a href="{{ path('app_menus') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+    </div>
+
+{% endblock %}

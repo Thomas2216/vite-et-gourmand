@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - Vite et Gourmand{% endblock %}
+
+{% block body %}
+    <div class="container-contact">
+        <h1>Contactez-nous</h1>
+
+        <div>
+            <p class="text_contact">
+                Vous avez une question, une suggestion ou simplement envie de nous dire bonjour ?<br>
+                N’hésitez pas à remplir le formulaire ci-dessous.
+            </p>
+        </div>
+
+        <div>
+            <form action="#" method="post">
+                <div>
+                    <label for="name">Nom :</label><br>
+                    <input type="text" id="name" name="name" placeholder="Votre nom">
+                </div>
+
+                <div>
+                    <label for="email">Email :</label><br>
+                    <input type="email" id="email" name="email" placeholder="Votre email">
+                </div>
+
+                <div>
+                    <label for="subject">Sujet :</label><br>
+                    <input type="text" id="subject" name="subject" placeholder="Sujet de votre message">
+                </div>
+
+                <div>
+                    <label for="message">Message :</label><br>
+                    <textarea id="message" name="message" rows="5" placeholder="Votre message"></textarea>
+                </div>
+
+                <div>
+                    <button class="button-contact" type="submit">Envoyer</button>
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <h2>Informations complémentaires</h2>
+            <ul>
+                <li>Email : <a href="mailto:contact@viteetgourmand.fr">contact@viteetgourmand.fr</a></li>
+                <li>Téléphone : 01 23 45 67 89</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

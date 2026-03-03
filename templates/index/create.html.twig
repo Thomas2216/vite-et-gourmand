@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer son profil{% endblock %}
+
+{% block body %}
+    <h1 class="create-title">Créez votre Profil</h1>
+
+    <div>
+        {{ form_start(form, {'attr': {'class': 'creation-form'}}) }}
+        {{ form(form) }}
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

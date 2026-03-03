@@ -1,0 +1,499 @@
+body {
+    background-color: #FFFFFF;
+    font-family: Tahoma,sans-serif;
+}
+
+/* Debut Header */
+
+header {
+    border-bottom: #9B7BC2 solid 5px ;
+    width: 100%;
+}
+
+.navbar {
+    padding : 0px ;
+    width: 100%;
+}
+
+.navbar-nav {
+    gap: 55px;
+}
+
+
+.container-fluid {
+    background-color: #5B2D8B !important;
+    color: #FFFFFF;
+    margin: 0px;
+}
+
+.nav-item {
+    color: #FFFFFF;
+    margin-right: 25px;
+}
+
+.nav-link {
+    color: #FFFFFF;
+    padding: 30px;
+    padding-top: 30px;
+    font-size: 30px;
+}
+
+/* Fin Header */
+
+/* Devut Footer */
+
+.footer {
+    background-color: #5B2D8B;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: #9B7BC2 solid 5px ;
+
+}
+
+.footer a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer p {
+    margin: 10px 0 0 0;
+}
+
+/* Fin Footer */
+
+.presentation {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-family: Tahoma;
+    font-size: 20px;
+    text-align: justify;
+    color: #3A3A3A;
+    border-bottom: #9B7BC2 solid 5px;
+    line-height: 35px;
+}
+
+.cards-presentation {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    padding: 15px;
+    background-color: black;
+}
+
+.card {
+    background-color: #5B2D8B;
+    color: #fff;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 300px;
+    max-width: 18rem;
+    margin: 25px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05, 1.05);
+}
+
+.card img {
+    max-height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.btn-card {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding-bottom: 15px;
+    background-color: #000000;
+    color: #FFFFFF;
+    border: none;
+}
+
+.btn-card:hover {
+    background-color: #222222;
+    color: #FFFFFF;
+}
+
+/* Cartes menus */
+
+.card-menu {
+    background-color: black;
+    padding : 15px
+}
+
+.card-menu .card {
+    flex: 1;
+    max-width: none;
+    margin: 0;
+}
+
+.card-menu .d-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.card-menu .card-list {
+    flex: 1;
+    display: flex;
+}
+
+.card-menu .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-menu .btn-eco {
+    margin-top: auto;
+}
+
+/* Fin Card-Menu */
+
+/* Formulaire de connexion*/
+
+.connexion-form {
+    background: #f9f9f9;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.connexion-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.connexion-form label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.connexion-form input[type="email"],
+.connexion-form input[type="password"] {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.connexion-form input[type="email"]:focus,
+.connexion-form input[type="password"]:focus {
+    border-color: #6C63FF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+
+.connexion-form button {
+    background: #6C63FF;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.connexion-form button:hover {
+    background: #574bde;
+}
+
+.alert {
+    background-color: #ffdddd;
+    color: #d8000c;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.not-yet {
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 35px;
+    color: #333;
+}
+
+.not-yet a {
+    color: #6C63FF;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.not-yet a:hover {
+    text-decoration: underline;
+}
+
+/* Fin Formulaire de Connexion */
+
+/* Formulaire de Création */
+
+.create-title{
+    text-align: center;
+    margin-top: 50px;
+}
+.creation-form {
+    background: #f9f9f9;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.creation-form h1,
+.creation-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.creation-form .form-row,
+.creation-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.creation-form label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.creation-form input,
+.creation-form select,
+.creation-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.creation-form input:focus,
+.creation-form select:focus,
+.creation-form textarea:focus {
+    border-color: #6C63FF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+
+.creation-form button {
+    background: #6C63FF;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+.creation-form button:hover {
+    background: #574bde;
+}
+
+.creation-form .form-errors,
+.creation-form .alert {
+    background-color: #ffdddd;
+    color: #d8000c;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Fin Formulaire de Création */
+
+
+/* Contact */
+
+.container-contact {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.text-contact {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Bouton */
+.button-contact {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e67e22;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #cf711f;
+}
+
+/* Fin Contact */
+
+/* Infos complémentaires */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+a {
+    color: #e67e22;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.presentation-menu {
+    border-bottom: #9B7BC2 solid 5px ;
+    margin-bottom: 0;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-family: Tahoma;
+    font-size: 20px;
+    text-align: justify;
+    color: #3A3A3A;
+    border-bottom: #9B7BC2 solid 5px;
+    line-height: 35px;
+
+}
+
+.menu-title {
+    padding-top: 40px ;
+}
+
+
+/* Menu Detail */
+
+.menu-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    font-size: 15px;
+    background-color: #ffffff;
+}
+
+.menu-table thead {
+    border-bottom: 2px solid #eaeaea;
+}
+
+.menu-table th {
+    text-align: left;
+    font-weight: 600;
+    padding: 15px 10px;
+    color: #5B2D8B;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.menu-table td {
+    padding: 18px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #444;
+}
+
+.menu-table tbody tr:hover {
+    background-color: #fafafa;
+    transition: 0.2s ease;
+}
+
+/* Fin Menu Detail */
+
+
+
