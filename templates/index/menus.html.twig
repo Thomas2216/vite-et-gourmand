@@ -35,7 +35,7 @@
 
                             <div class="card-body">
 
-                                <h5 class="card-title">{{ menu.description }}</h5>
+                                <h5 class="card-title">{{ menu.description|raw}}</h5>
                                 <h5 class="card-title">Personnes minimum : {{ menu.minPersonne }}</h5>
 
                                 <p class="card-text">Prix : {{ menu.prix }} €</p>
@@ -49,8 +49,8 @@
 
                                 <hr>
 
-                                <a href="#" class="btn-eco btn-primary">
-                                    Réserver ce Menu
+                                <a href="{{ path('app_commande') }}" class="btn-eco btn-primary">
+                                    Passer commande
                                 </a>
                             </div>
                         </div>

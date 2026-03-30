@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <h2>Passer votre commande</h2>
+
+    <div class="body-commande">
+        <div>
+            <ul>
+                <li>Nom : {{ app.user.nom }}</li>
+                <li>Prénom : {{ app.user.prenom }}</li>
+                <li>Email : {{ app.user.email }}</li>
+                <li>Téléphone : {{ app.user.telephone }}</li>
+            </ul>
+            <div>
+{#                {{ form_start(form) }}#}
+{#                {{ form(form) }}#}
+{#                {{ form_end(form) }}#}
+
+                <select id="liste-menus-a-selectionner">
+                    <option value="">-- Choisissez un menu --</option>
+                    {% for menu in menus %}
+                        <option value="{{ menu.id }}">{{ menu.nom }} ({{ menu.prix }}€)</option>
+                    {% endfor %}
+                </select>
+
+
+                <button
+                    id="btn-add-item">
+                    Ajouter le menu
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Votre commande</h5>
+
+                <ul id="menu-list">
+
+                </ul>
+
+                <p id="prix-total">Total :</p>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

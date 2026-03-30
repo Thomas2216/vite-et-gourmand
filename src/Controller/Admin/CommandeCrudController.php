@@ -22,7 +22,7 @@ class CommandeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            DateTimeField::new('date_commande', 'Date de Commande'),
+            DateTimeField::new('date_commande', 'Date de commande'),
             DateTimeField::new('date_livraison', 'Date de Livraison'),
             TimeField::new('heure_livraison', 'Heure de Livraison'),
             TextField::new('adresse', 'Adresse de Livraison'),

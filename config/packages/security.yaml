@@ -19,6 +19,9 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
             logout:
                 path: app_logout
                 target: app_login
@@ -33,9 +36,8 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        -   path: ^/admin
-            roles: [ROLE_ADMIN , ROLE_EMPLOYE]
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: [ ROLE_ADMIN, ROLE_EMPLOYE ] }
+        - { path: ^/order, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

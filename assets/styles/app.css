@@ -495,5 +495,12 @@ a:hover {
 
 /* Fin Menu Detail */
 
+/*Page commande*/
+
+.body-commande {
+    display: flex;
+    flex-direction: row;
+}
+
 
 

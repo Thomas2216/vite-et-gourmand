@@ -16,8 +16,9 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $numero_commande = null;
+
+    #[ORM\Column (nullable: true)]
+    private ?int $numero_commande = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date_commande = null;
@@ -63,12 +64,12 @@ class Commande
         return $this->id;
     }
 
-    public function getNumeroCommande(): ?string
+    public function getNumeroCommande(): ?int
     {
         return $this->numero_commande;
     }
 
-    public function setNumeroCommande(string $numero_commande): static
+    public function setNumeroCommande(int $numero_commande): static
     {
         $this->numero_commande = $numero_commande;
 
