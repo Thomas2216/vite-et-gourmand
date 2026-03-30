@@ -21,7 +21,7 @@
                 <select id="liste-menus-a-selectionner">
                     <option value="">-- Choisissez un menu --</option>
                     {% for menu in menus %}
-                        <option value="{{ menu.id }}">{{ menu.nom }} ({{ menu.prix }}€)</option>
+                        <option value="{{ menu.id }}">{{ menu.titre }} ({{ menu.prix }}€)</option>
                     {% endfor %}
                 </select>
 

@@ -21,6 +21,8 @@ final class CommandeController extends AbstractController
     {
         $commande = new Commande();
 
+        $menus = $em->getRepository(Menu::class)->findAll();
+
         $form = $this->createForm(CommandeType::class, $commande);
 
         $form->handleRequest($request);
@@ -48,6 +50,7 @@ final class CommandeController extends AbstractController
         return $this->render('index/commande.html.twig', [
             'controller_name' => 'CommandeController',
             'form' => $form->createView(),
+            'menus' => $menus,
         ]);
     }
 
