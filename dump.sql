@@ -1,4 +1,4 @@
-INSERT INTO user (id, email, password, role, nom, prenom, adresse, ville, telephone) VALUES
+INSERT INTO user (id, email, password, roles, nom, prenom, adresse, ville, telephone) VALUES
 -- ADMIN
 (1, 'admin@demo.fr', '$2y$13$abcdefghijklmnopqrstuv', '["ROLE_ADMIN"]', 'Admin', 'Super', '1 rue Admin', 'Paris', '0600000001'),
 

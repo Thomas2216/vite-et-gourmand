@@ -89,6 +89,11 @@ class Menu
         return $this->prix;
     }
 
+    public function getPrixFormate(): float
+    {
+        return $this->prix / 100;
+    }
+
     public function setPrix(float $prix): static
     {
         $this->prix = $prix;

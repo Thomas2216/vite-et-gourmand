@@ -58,7 +58,7 @@ final class CommandeController extends AbstractController
     public function addItem(HttpFoundationRequest $request, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        $itemId = $data['itemId'] ?? null;
+        $menuId = $data['menuId'] ?? null;
 
         $session = $request->getSession();
         $panier = $session->get('panier', []);
@@ -66,38 +66,50 @@ final class CommandeController extends AbstractController
         $action = $data['action'] ?? 'add';
 
         if ($action == 'add') {
-            if (isset($panier[$itemId])) {
-                $panier[$itemId]++;
+            if (isset($panier[$menuId])) {
+                $panier[$menuId]++;
             }
             else {
-                $panier[$itemId] = 1;
+                $panier[$menuId] = 1;
             }
         }
         elseif ($action == 'remove') {
-            if (isset($panier[$itemId])) {
-                $panier[$itemId]--;
-                if ($panier[$itemId] <= 0) {
-                    unset($panier[$itemId]);
+            if (isset($panier[$menuId])) {
+                $panier[$menuId]--;
+                if ($panier[$menuId] <= 0) {
+                    unset($panier[$menuId]);
                 }
             }
         }
 
         $session->set('panier', $panier);
 
-        $totalItems =0;
+        $totalItems = 0;
+        $sousTotalPrix = 0;
         $totalPrix = 0;
+        $detailPanier = [];
 
         foreach ($panier as $menuId => $quantite) {
             $menu = $em->getRepository(Menu::class)->find($menuId);
-
-            $totalItems += $quantite;
-            $totalPrix += $menu->getPrix() * $quantite;
+            if ($menu) {
+                $totalItems += $quantite;
+                $sousTotalPrix = $menu->getPrix() * $quantite;
+                $totalPrix += $sousTotalPrix / 100;
+                $detailPanier[] = [
+                    'menuId' => $menuId,
+                    'quantite' => $quantite,
+                    'titre' => $menu->getTitre(),
+                    'prix' => $menu->getPrixFormate(),
+                    'sousTotal' => $sousTotalPrix / 100,
+                ];
+            }
 
         }
 
         return $this->json([
             'totalItems' => $totalItems,
             'totalPrix' => $totalPrix,
+            'detailPanier' => $detailPanier,
             'action' => $action,
         ]);
     }
