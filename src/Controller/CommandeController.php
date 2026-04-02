@@ -33,7 +33,7 @@ final class CommandeController extends AbstractController
 
             $total = 0;
             foreach ($commande->getMenu() as $menu) {
-                $total += $menu->getPrix() / 100 * $nombrePersonnes;
+                $total += $menu->getPrix() * $nombrePersonnes;
 
                 // Réduction 10%
                 if ($nombrePersonnes >= $menu->getMinPersonne() + 5) {
@@ -54,7 +54,9 @@ final class CommandeController extends AbstractController
             $commande->setNumeroCommande($commande->getId());
             $em->flush();
 
-            return $this->redirectToRoute('app_commande');
+            $this->addFlash('success', 'Votre commande n°' . $commande->getNumeroCommande() . ' a bien été enregistrée !');
+
+            return $this->redirectToRoute('app_user');
         }
 
         return $this->render('index/commande.html.twig', [
@@ -113,6 +115,7 @@ final class CommandeController extends AbstractController
                     'titre'     => $menu->getTitre(),
                     'prix'      => $menu->getPrixFormate(),
                     'sousTotal' => $sousTotalMenu / 100,
+                    'minPersonne' => $menu->getMinPersonne(),
                 ];
             }
         }

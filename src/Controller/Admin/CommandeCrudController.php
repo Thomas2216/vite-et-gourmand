@@ -26,7 +26,7 @@ class CommandeCrudController extends AbstractCrudController
             DateTimeField::new('date_livraison', 'Date de Livraison'),
             TimeField::new('heure_livraison', 'Heure de Livraison'),
             TextField::new('adresse', 'Adresse de Livraison'),
-            MoneyField::new('prix_total', 'Prix Total')->setCurrency('EUR'),
+            MoneyField::new('prix_total', 'Prix Total')->setCurrency('EUR')->setStoredAsCents(false),
             TextField::new('statut', 'Statut')
         ];
     }

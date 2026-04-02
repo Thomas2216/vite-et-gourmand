@@ -22,6 +22,12 @@ document.addEventListener("turbo:load", () => {
             totalPrix.textContent = "Total : " + data.totalPrix + " €";
         }
 
+        const detailPrix     = document.getElementById('detail-prix');
+        const sousTotalEl    = document.getElementById('sous-total-menus');
+        const reductionEl    = document.getElementById('ligne-reduction');
+        const fraisEl        = document.getElementById('ligne-frais');
+        const totalEl        = document.getElementById('prix-total');
+
         menuList.innerHTML = '';
 
         if (data.detailPanier && data.detailPanier.length > 0) {
@@ -31,6 +37,40 @@ document.addEventListener("turbo:load", () => {
                                 <button class="btn-rm-item" data-menu-id="${item.menuId}">X</button>`;
                 menuList.appendChild(li);
             });
+
+            let sousTotalMenus = 0;
+            data.detailPanier.forEach(item => {
+                sousTotalMenus += item.sousTotal;
+            });
+
+            sousTotalEl.textContent = 'Sous-total menus : ' + sousTotalMenus.toFixed(2) + '€';
+
+            let reductionApplicable = false;
+            const nombrePersonnes = parseInt(document.getElementById('commande_nombre_personnes').value);
+
+            data.detailPanier.forEach(item => {
+                if (nombrePersonnes >= item.minPersonne + 5) {
+                    reductionApplicable = true;
+                }
+            });
+
+            if (reductionApplicable) {
+                const montantReduction = sousTotalMenus * 0.10;
+                reductionEl.textContent = 'Réduction 10% : -' + montantReduction.toFixed(2) + '€';
+                reductionEl.style.display = 'block';
+                sousTotalMenus = sousTotalMenus * 0.90;
+            } else {
+                reductionEl.style.display = 'none';
+            }
+
+            const fraisLivraison = parseFloat(document.getElementById('commande_frais_livraison').value) || 0;
+            fraisEl.textContent = 'Frais de livraison : ' + fraisLivraison.toFixed(2) + '€';
+
+            const total = sousTotalMenus + fraisLivraison;
+            totalEl.innerHTML = '<strong>Total : ' + total.toFixed(2) + '€</strong>';
+
+            } else {
+            detailPrix.style.display = 'none';
         }
 
         menuList.style.display = "block";
