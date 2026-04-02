@@ -30,6 +30,9 @@
         {% else %}
             <p>Aucun plat associé à ce menu.</p>
         {% endif %}
+        <a href="{{ path('app_commande', {'menuId': menu.id}) }}" class="btn btn-primary mt-3">
+            Commander ce menu
+        </a>
 
         <a href="{{ path('app_menus') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
     </div>

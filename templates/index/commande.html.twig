@@ -5,7 +5,10 @@
 {% block body %}
     <h2>Passer votre commande</h2>
 
+    {{ form_start(form) }}
+
     <div class="body-commande">
+
         <div>
             <ul>
                 <li>Nom : {{ app.user.nom }}</li>
@@ -13,38 +16,49 @@
                 <li>Email : {{ app.user.email }}</li>
                 <li>Téléphone : {{ app.user.telephone }}</li>
             </ul>
-            <div>
-{#                {{ form_start(form) }}#}
-{#                {{ form(form) }}#}
-{#                {{ form_end(form) }}#}
 
-                <select id="liste-menus-a-selectionner">
-                    <option value="">-- Choisissez un menu --</option>
-                    {% for menu in menus %}
-                        <option value="{{ menu.id }}">{{ menu.titre }} ({{ menu.prixFormate }}€)</option>
-                    {% endfor %}
-                </select>
+            {{ form_row(form.date_livraison) }}
+            {{ form_row(form.heure_livraison) }}
+            {{ form_row(form.adresse) }}
+            {{ form_row(form.nombre_personnes) }}
+            {{ form_row(form.frais_livraison) }}
 
+            <p id="frais-livraison">Frais de livraison : --</p>
 
-                <button
-                    id="btn-add-item">
-                    Ajouter le menu
-                </button>
-            </div>
+            <select id="liste-menus-a-selectionner">
+                <option value="">-- Choisissez un menu --</option>
+                {% for menu in menus %}
+                    <option value="{{ menu.id }}"
+                        data-min-personne="{{ menu.minPersonne }}"
+                        {% if menuIdPreselect is not null and menu.id == menuIdPreselect %}
+                            selected
+                        {% endif %}>
+                        {{ menu.titre }} ({{ menu.prixFormate }}€)
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="button" id="btn-add-item">Ajouter le menu</button>
+
+            {{ form_row(form.submit) }}
         </div>
 
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Votre commande</h5>
 
-                <ul id="menu-list">
-                </ul>
+                <ul id="menu-list"></ul>
 
                 <p id="prix-total">Total :</p>
             </div>
         </div>
+
     </div>
 
+    {{ form_end(form) }}
 
+    <script>
+        const ORS_KEY = "{{ ors_key }}";
+    </script>
 
 {% endblock %}

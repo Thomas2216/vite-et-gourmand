@@ -38,6 +38,9 @@ class Commande
     #[ORM\Column(length: 255)]
     private ?string $statut = null;
 
+    #[ORM\Column]
+    private ?int $nombre_personnes = null;
+
     /**
      * @var Collection<int, User>
      */
@@ -145,6 +148,17 @@ class Commande
     {
         $this->statut = $statut;
 
+        return $this;
+    }
+
+    public function getNombrePersonnes(): ?int
+    {
+        return $this->nombre_personnes;
+    }
+
+    public function setNombrePersonnes(int $nombre_personnes): static
+    {
+        $this->nombre_personnes = $nombre_personnes;
         return $this;
     }
 
