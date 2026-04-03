@@ -42,8 +42,7 @@
 
                                 <hr>
 
-                                <a href="{{ path('app_menu_detail', {'id': menu.id}) }}">Voir le détail</a>
-                                {% if menu.regime != NULL %}
+                                <a href="{{ path('app_menu_detail', {'id': menu.id}) }}" class="btn-eco">Voir le détail</a>                                {% if menu.regime != NULL %}
                                     <p class="card-text">Régime : {{ menu.regime }}
                                 {% endif %}
 
