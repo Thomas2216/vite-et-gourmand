@@ -503,4 +503,37 @@ a:hover {
 }
 
 
+/* Media queries */
+
+@media (max-width: 768px) {
+
+    .nav-link {
+        font-size: 16px;
+        padding: 10px;
+    }
+    .navbar-nav {
+        gap: 10px;
+    }
+
+    .presentation,
+    .presentation-menu {
+        padding: 40px 20px;
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .body-commande {
+        flex-direction: column;
+    }
+
+    .card-menu .d-flex {
+        flex-wrap: wrap;
+    }
+
+    .card {
+        max-width: 100%;
+        margin: 15px 0;
+    }
+}
+
 
