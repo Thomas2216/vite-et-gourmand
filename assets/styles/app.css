@@ -135,6 +135,10 @@ header {
     transform: scale(1.05, 1.05);
 }
 
+.card-accueil {
+    width: 18rem;
+}
+
 .card img {
     max-height: 180px;
     object-fit: cover;
@@ -210,6 +214,11 @@ header {
     background-color: #222222;
     color: #FFFFFF;
     text-decoration: none;
+}
+
+.card-menu-img {
+    max-width: 200px;
+    width: 100%;
 }
 
 /* Fin Card-Menu */

@@ -19,15 +19,15 @@
                         <div class="card">
                             <!-- Image du menu -->
                             {% if menu.titre == 'Menu Italien' %}
-                                <img src="{{ asset('images/menu_italien.png') }}" style="max-width: 200px" alt="Menu Italien">
+                                <img src="{{ asset('images/menu_italien.png') }}" class="card-menu-img" alt="Menu Italien">
                             {% elseif menu.titre == 'Menu Healthy' %}
-                                <img src="{{ asset('images/menu_healthy.png') }}" style="max-width: 200px" alt="Menu Healthy">
+                                <img src="{{ asset('images/menu_healthy.png') }}" class="card-menu-img" alt="Menu Healthy">
                             {% elseif menu.titre == 'Menu Gourmet' %}
-                                <img src="{{ asset('images/menu_gourmet.png') }}" style="max-width: 200px" alt="Menu Gourmet">
+                                <img src="{{ asset('images/menu_gourmet.png') }}" class="card-menu-img" alt="Menu Gourmet">
                             {% elseif menu.titre == 'Menu Famille' %}
-                                <img src="{{ asset('images/menu_famille.png') }}" style="max-width: 200px" alt="Menu Famille">
+                                <img src="{{ asset('images/menu_famille.png') }}" class="card-menu-img" alt="Menu Famille">
                             {% elseif menu.titre == 'Menu Express' %}
-                                <img src="{{ asset('images/menu_express.png') }}" style="max-width: 200px" alt="Menu Express">
+                                <img src="{{ asset('images/menu_express.png') }}" class="card-menu-img" alt="Menu Express">
                             {% endif %}
                             <div class="card-header">
                                 {{menu.titre}}
