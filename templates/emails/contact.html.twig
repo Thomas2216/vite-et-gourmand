@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouveau message de contact</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .email-wrapper { max-width: 600px; margin: 30px auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .email-header { background-color: #5B2D8B; color: #fff; padding: 25px 30px; }
+        .email-header h1 { margin: 0; font-size: 20px; }
+        .email-body { padding: 30px; }
+        .email-field { margin-bottom: 20px; }
+        .email-field strong { display: block; color: #5B2D8B; margin-bottom: 5px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .email-field p { margin: 0; padding: 12px; background: #f9f9f9; border-radius: 6px; border-left: 3px solid #9B7BC2; white-space: pre-wrap; }
+        .email-footer { background: #f9f9f9; padding: 15px 30px; font-size: 12px; color: #999; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-header">
+            <h1>Nouveau message de contact — Vite & Gourmand</h1>
+        </div>
+        <div class="email-body">
+            <div class="email-field">
+                <strong>Expéditeur</strong>
+                <p>{{ email }}</p>
+            </div>
+            <div class="email-field">
+                <strong>Titre</strong>
+                <p>{{ titre }}</p>
+            </div>
+            <div class="email-field">
+                <strong>Message</strong>
+                <p>{{ description }}</p>
+            </div>
+        </div>
+        <div class="email-footer">
+            Ce message a été envoyé depuis le formulaire de contact du site Vite &amp; Gourmand.
+        </div>
+    </div>
+</body>
+</html>

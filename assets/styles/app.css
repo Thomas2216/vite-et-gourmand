@@ -466,6 +466,51 @@ button:hover {
     background-color: #4a2270;
 }
 
+.contact-info {
+    max-width: 400px;
+    margin: 0 auto 40px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 25px 30px;
+}
+
+.contact-info h2 {
+    color: #5B2D8B;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.contact-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-info-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #333;
+}
+
+.contact-info-list li:last-child {
+    border-bottom: none;
+}
+
+.contact-info-label {
+    font-weight: 600;
+    color: #5B2D8B;
+    min-width: 90px;
+}
+
 /* Fin Contact */
 
 /* Infos complémentaires */
