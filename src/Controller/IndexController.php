@@ -117,7 +117,7 @@ final class IndexController extends AbstractController
                 ->htmlTemplate('emails/contact.html.twig')
                 ->context([
                     'titre'       => $data['titre'],
-                    'email'       => $data['email'],
+                    'expediteur'  => $data['email'],
                     'description' => $data['description'],
                 ]);
 
