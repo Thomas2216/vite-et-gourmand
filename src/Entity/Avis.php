@@ -9,6 +9,19 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
 class Avis
 {
+    const STATUT_EN_ATTENTE = 'en_attente';
+    const STATUT_VALIDE     = 'valide';
+    const STATUT_REFUSE     = 'refuse';
+
+    public static function getStatuts(): array
+    {
+        return [
+            'En attente' => self::STATUT_EN_ATTENTE,
+            'Validé'     => self::STATUT_VALIDE,
+            'Refusé'     => self::STATUT_REFUSE,
+        ];
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -19,6 +32,9 @@ class Avis
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $commentaire = null;
+
+    #[ORM\Column(length: 20)]
+    private string $statut = self::STATUT_EN_ATTENTE;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?User $user = null;
@@ -48,6 +64,18 @@ class Avis
     public function setCommentaire(?string $commentaire): static
     {
         $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    public function getStatut(): string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): static
+    {
+        $this->statut = $statut;
 
         return $this;
     }
