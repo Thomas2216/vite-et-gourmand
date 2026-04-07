@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.twig$\")",
+      "Bash(php bin/console doctrine:migrations:diff --no-interaction)"
+    ]
+  }
+}

@@ -46,7 +46,7 @@ final class CommandeController extends AbstractController
             $commande->setPrixTotal($total);
             $commande->setUser($this->getUser());
             $commande->setDateCommande(new \DateTime());
-            $commande->setStatut('en attente');
+            $commande->setStatut(Commande::STATUT_EN_ATTENTE);
 
             $em->persist($commande);
             $em->flush();
