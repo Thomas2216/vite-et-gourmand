@@ -543,6 +543,132 @@ a:hover {
 }
 
 
+/* Page profil utilisateur */
+
+.profil-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.profil-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #3A3A3A;
+}
+
+.profil-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 35px 40px;
+    margin-bottom: 30px;
+}
+
+.profil-section-title {
+    color: #5B2D8B;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    margin-top: 0;
+}
+
+.profil-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.profil-table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.profil-table-last {
+    border-bottom: none !important;
+}
+
+.profil-table td {
+    padding: 12px 0;
+}
+
+.profil-label {
+    font-weight: 600;
+    color: #555;
+    width: 40%;
+}
+
+.profil-value {
+    color: #333;
+}
+
+.profil-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-modifier {
+    background: #6C63FF;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-modifier:hover {
+    background: #574bde;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-deconnexion {
+    background: #eeeeee;
+    color: #555;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-deconnexion:hover {
+    background: #ddd;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Formulaire modification profil */
+
+.form-separator {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.form-back-link {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-back-link a {
+    color: #6C63FF;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.form-back-link a:hover {
+    color: #574bde;
+    text-decoration: underline;
+}
+
+/* Fin Page profil utilisateur */
+
 /* Media queries */
 
 @media (max-width: 768px) {

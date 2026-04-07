@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block body %}
+
+    <h1 class="create-title">Modifier mon profil</h1>
+
+    {{ form_start(form, {'attr': {'class': 'creation-form'}}) }}
+
+        {{ form_errors(form) }}
+
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.ville) }}
+
+        <hr class="form-separator">
+
+        {{ form_row(form.plainPassword) }}
+
+        {{ form_row(form.submit) }}
+
+    {{ form_end(form) }}
+
+    <div class="form-back-link">
+        <a href="{{ path('app_user') }}">← Retour à mon espace</a>
+    </div>
+
+{% endblock %}

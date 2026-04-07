@@ -1,12 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil utilisateur{% endblock %}
+{% block title %}Mon espace{% endblock %}
 
 {% block body %}
-    <h1>Bonjour {{ app.user.prenom }}, et bienvenue sur votre espace !</h1>
 
+    <div class="profil-container">
 
+        <h1 class="profil-title">
+            Bonjour {{ app.user.prenom }} {{ app.user.nom }} !
+        </h1>
 
-    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        <div class="profil-card">
+
+            <h2 class="profil-section-title">Mes informations</h2>
+
+            <table class="profil-table">
+                <tr>
+                    <td class="profil-label">Nom</td>
+                    <td class="profil-value">{{ app.user.nom }}</td>
+                </tr>
+                <tr>
+                    <td class="profil-label">Prénom</td>
+                    <td class="profil-value">{{ app.user.prenom }}</td>
+                </tr>
+                <tr>
+                    <td class="profil-label">Email</td>
+                    <td class="profil-value">{{ app.user.email }}</td>
+                </tr>
+                <tr>
+                    <td class="profil-label">Téléphone</td>
+                    <td class="profil-value">{{ app.user.telephone ?? '—' }}</td>
+                </tr>
+                <tr>
+                    <td class="profil-label">Adresse</td>
+                    <td class="profil-value">{{ app.user.adresse ?? '—' }}</td>
+                </tr>
+                <tr class="profil-table-last">
+                    <td class="profil-label">Ville</td>
+                    <td class="profil-value">{{ app.user.ville ?? '—' }}</td>
+                </tr>
+            </table>
+
+            <div class="profil-actions">
+                <a href="{{ path('app_user_edit') }}" class="btn-modifier">
+                    Modifier mon profil
+                </a>
+                <a href="{{ path('app_logout') }}" class="btn-deconnexion">
+                    Se déconnecter
+                </a>
+            </div>
+
+        </div>
+
+    </div>
 
 {% endblock %}
