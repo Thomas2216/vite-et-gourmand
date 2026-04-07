@@ -6,10 +6,11 @@ use App\Entity\Commande;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 
 class CommandeCrudController extends AbstractCrudController
 {
@@ -27,7 +28,7 @@ class CommandeCrudController extends AbstractCrudController
             TimeField::new('heure_livraison', 'Heure de Livraison'),
             TextField::new('adresse', 'Adresse de Livraison'),
             MoneyField::new('prix_total', 'Prix Total')->setCurrency('EUR')->setStoredAsCents(false),
-            TextField::new('statut', 'Statut')
+            ChoiceField::new('statut', 'Statut')->setChoices(Commande::getStatuts())
         ];
     }
 

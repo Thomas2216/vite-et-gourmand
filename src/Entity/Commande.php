@@ -11,6 +11,27 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
+    const STATUT_EN_ATTENTE                  = 'en_attente';
+    const STATUT_ACCEPTEE                    = 'acceptee';
+    const STATUT_EN_PREPARATION              = 'en_preparation';
+    const STATUT_EN_COURS_DE_LIVRAISON       = 'en_cours_de_livraison';
+    const STATUT_LIVREE                      = 'livree';
+    const STATUT_EN_ATTENTE_RETOUR_MATERIEL  = 'en_attente_retour_materiel';
+    const STATUT_TERMINEE                    = 'terminee';
+
+    public static function getStatuts(): array
+    {
+        return [
+            'En attente'                  => self::STATUT_EN_ATTENTE,
+            'Acceptée'                    => self::STATUT_ACCEPTEE,
+            'En préparation'              => self::STATUT_EN_PREPARATION,
+            'En cours de livraison'       => self::STATUT_EN_COURS_DE_LIVRAISON,
+            'Livrée'                      => self::STATUT_LIVREE,
+            'En attente retour matériel'  => self::STATUT_EN_ATTENTE_RETOUR_MATERIEL,
+            'Terminée'                    => self::STATUT_TERMINEE,
+        ];
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -35,7 +56,7 @@ class Commande
     #[ORM\Column]
     private ?float $prix_total = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $statut = null;
 
     #[ORM\Column]
