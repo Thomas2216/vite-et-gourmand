@@ -15,16 +15,16 @@
     <!--cards de présentation-->
     <div class="cards-presentation">
         <div class="card card-accueil">
-            <img src="{{ asset(‘images/plat_appetissant.jpg’) }}" class="card-img-top" alt="plat">
+            <img src="{{ asset("images/plat_appetissant.jpg") }}" class="card-img-top" alt="plat">
             <div class="card-body">
                 <h5 class="card-title">Découvrez nos menus</h5>
                     <p class="card-text">Chaque saison apporte de nouvelles saveurs ! De l’entrée au dessert, nos menus sont conçus pour surprendre et ravir vos convives. Que ce soit un repas simple ou un événement spécial, Julie et José mettent leur savoir-faire à votre service.
                     </p>
-                <a href="{{ path(‘app_menus’)}}" class="btn-card btn btn-primary" >Voir les Menus</a>
+                <a href="{{ path("app_menus")}}" class="btn-card btn btn-primary" >Voir les Menus</a>
             </div>
         </div>
         <div class="card card-accueil">
-            <img src="{{ asset(‘images/buffet.jpg’) }}" class="card-img-top" alt="buffet">
+            <img src="{{ asset("images/buffet.jpg") }}" class="card-img-top" alt="buffet">
             <div class="card-body">
                 <h5 class="card-title">Pour tous vos événements</h5>
                     <p class="card-text">Noël, Pâques, anniversaires ou repas d’entreprise… Vite & Gourmand transforme chaque moment en expérience culinaire unique. Profitez d’un service personnalisé et d’une organisation clé en main pour que tout soit parfait.
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="card card-accueil">
-            <img src="{{ asset(‘images/livraison.jpg’) }}" class="card-img-top" alt="livraison">
+            <img src="{{ asset("images/livraison.jpg") }}" class="card-img-top" alt="livraison">
             <div class="card-body">
                 <h5 class="card-title">Commandez facilement</h5>
                     <p class="card-text">Plus besoin d’attendre le mail ! Grâce à notre application web, découvrez nos menus et passez vos commandes directement en ligne. Simple, rapide et pratique, pour ne jamais manquer une délicieuse occasion.
@@ -42,5 +42,26 @@
             </div>
         </div>
     </div>
+
+    {% if avis|length %}
+    <section class="avis-section">
+        <h2 class="avis-section-title">Ce que disent nos clients</h2>
+        <div class="avis-list">
+            {% for item in avis %}
+            <div class="avis-card">
+                <div class="avis-stars">
+                    {% for i in 1..5 %}
+                        <span class="star {% if i <= item.note %}star-filled{% else %}star-empty{% endif %}">★</span>
+                    {% endfor %}
+                </div>
+                {% if item.commentaire %}
+                    <p class="avis-commentaire">"{{ item.commentaire }}"</p>
+                {% endif %}
+                <p class="avis-auteur">— {{ item.user.prenom }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
 
 {% endblock %}

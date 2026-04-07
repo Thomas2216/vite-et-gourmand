@@ -513,6 +513,83 @@ button:hover {
 
 /* Fin Contact */
 
+/* Section avis — page d'accueil */
+
+.avis-section {
+    background-color: #1a1a2e;
+    padding: 60px 20px;
+    border-top: 5px solid #9B7BC2;
+}
+
+.avis-section-title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.avis-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.avis-card {
+    background-color: #5B2D8B;
+    color: #fff;
+    border-radius: 12px;
+    padding: 25px 30px;
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.3s ease;
+}
+
+.avis-card:hover {
+    transform: translateY(-4px);
+}
+
+.avis-stars {
+    display: flex;
+    gap: 3px;
+}
+
+.star {
+    font-size: 1.3rem;
+}
+
+.star-filled {
+    color: #f5c518;
+}
+
+.star-empty {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.avis-commentaire {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.avis-auteur {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9B7BC2;
+    margin: 0;
+    margin-top: auto;
+}
+
+/* Fin Section avis */
+
 /* Infos complémentaires */
 ul {
     list-style: none;
@@ -694,6 +771,70 @@ a:hover {
     background: #ddd;
     color: #333;
     text-decoration: none;
+}
+
+.btn-avis {
+    background: #5B2D8B;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-avis:hover {
+    background: #4a2270;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Avis utilisateur (page profil) */
+
+.avis-item-user {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.avis-item-user:last-child {
+    border-bottom: none;
+}
+
+.avis-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.avis-item-commentaire {
+    color: #555;
+    font-size: 14px;
+    margin: 0;
+}
+
+.avis-statut {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.avis-statut-en_attente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.avis-statut-valide {
+    background: #d1f0e0;
+    color: #186a3b;
+}
+
+.avis-statut-refuse {
+    background: #fde8e8;
+    color: #a93226;
 }
 
 /* Formulaire modification profil */

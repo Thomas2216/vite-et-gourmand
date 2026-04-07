@@ -45,12 +45,44 @@
                 <a href="{{ path('app_user_edit') }}" class="btn-modifier">
                     Modifier mon profil
                 </a>
+                <a href="{{ path('app_avis_nouveau') }}" class="btn-avis">
+                    Laisser un avis
+                </a>
                 <a href="{{ path('app_logout') }}" class="btn-deconnexion">
                     Se déconnecter
                 </a>
             </div>
 
         </div>
+
+        {% if app.user.avis|length %}
+        <div class="profil-card">
+
+            <h2 class="profil-section-title">Mes avis</h2>
+
+            {% for avis in app.user.avis %}
+            <div class="avis-item-user">
+                <div class="avis-item-header">
+                    <div class="avis-stars">
+                        {% for i in 1..5 %}
+                            <span class="star {% if i <= avis.note %}star-filled{% else %}star-empty{% endif %}">★</span>
+                        {% endfor %}
+                    </div>
+                    <span class="avis-statut avis-statut-{{ avis.statut }}">
+                        {% if avis.statut == 'en_attente' %}En attente
+                        {% elseif avis.statut == 'valide' %}Validé
+                        {% elseif avis.statut == 'refuse' %}Refusé
+                        {% endif %}
+                    </span>
+                </div>
+                {% if avis.commentaire %}
+                    <p class="avis-item-commentaire">{{ avis.commentaire }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endif %}
 
     </div>
 

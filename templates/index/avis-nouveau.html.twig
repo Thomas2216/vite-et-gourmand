@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Laisser un avis — Vite & Gourmand{% endblock %}
+
+{% block body %}
+
+    <h1 class="create-title">Laisser un avis</h1>
+
+    {{ form_start(form, {'attr': {'class': 'creation-form'}}) }}
+
+        {{ form_errors(form) }}
+
+        {{ form_row(form.note) }}
+        {{ form_row(form.commentaire) }}
+        {{ form_row(form.submit) }}
+
+    {{ form_end(form) }}
+
+    <div class="form-back-link">
+        <a href="{{ path('app_user') }}">← Retour à mon espace</a>
+    </div>
+
+{% endblock %}

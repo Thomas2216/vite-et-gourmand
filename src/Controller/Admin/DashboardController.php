@@ -9,10 +9,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 
-use App\Entity\User;
-use App\Entity\Menu;
+use App\Entity\Avis;
 use App\Entity\Commande;
+use App\Entity\Menu;
 use App\Entity\Plat;
+use App\Entity\User;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -37,6 +38,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Menus', 'fas fa-list', Menu::class);
         yield MenuItem::linkToCrud('Commandes', 'fas fa-eur', Commande::class);
         yield MenuItem::linkToCrud('Plats', 'fas fa-cutlery', Plat::class);
+        yield MenuItem::linkToCrud('Avis', 'fas fa-star', Avis::class);
         yield MenuItem::linkToRoute('Retour à Vite & Gourmand', 'fa fa-home', 'app_accueil');
         yield MenuItem::linkToLogout('Déconnexion', 'fas fa-sign-out-alt');
     }

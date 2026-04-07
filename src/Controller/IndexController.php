@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use App\Form\EditProfileType;
+use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +19,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_accueil')]
-    public function index(): Response
+    public function index(AvisRepository $avisRepository): Response
     {
-        return $this->render('index/index.html.twig');
+        return $this->render('index/index.html.twig', [
+            'avis' => $avisRepository->findValides(),
+        ]);
     }
 
     /** #[Route('/login', name: 'app_login')]
