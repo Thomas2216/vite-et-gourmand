@@ -43,7 +43,25 @@ final class CommandeController extends AbstractController
             }
 
             $nombrePersonnes = $commande->getNombrePersonnes();
-            $fraisLivraison = $form->get('frais_livraison')->getData() ?? 0;
+
+            foreach ($commande->getMenu() as $menuItem) {
+                if ($nombrePersonnes < $menuItem->getMinPersonne()) {
+                    $this->addFlash('error', sprintf(
+                        'Le nombre de personnes est insuffisant pour le menu %s (minimum %d personnes).',
+                        $menuItem->getTitre(),
+                        $menuItem->getMinPersonne()
+                    ));
+                    return $this->render('index/commande.html.twig', [
+                        'controller_name' => 'CommandeController',
+                        'form'            => $form->createView(),
+                        'menus'           => $menus,
+                        'menuIdPreselect' => $menuIdPreselect,
+                        'ors_key'         => $_ENV['ORS_API_KEY'],
+                    ]);
+                }
+            }
+
+            $fraisLivraison = (float) ($form->get('frais_livraison')->getData() ?? 0);
 
             $total = 0;
             foreach ($commande->getMenu() as $menu) {
