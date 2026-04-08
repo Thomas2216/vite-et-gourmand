@@ -47,12 +47,12 @@ class Menu
      * @var Collection<int, Plat>
      */
     #[ORM\ManyToMany(targetEntity: Plat::class, inversedBy: 'menus')]
-    private Collection $Plats;
+    private Collection $plats;
 
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
-        $this->Plats = new ArrayCollection();
+        $this->plats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,13 +181,13 @@ class Menu
      */
     public function getPlats(): Collection
     {
-        return $this->Plats;
+        return $this->plats;
     }
 
     public function addPlat(Plat $plat): static
     {
-        if (!$this->Plats->contains($plat)) {
-            $this->Plats->add($plat);
+        if (!$this->plats->contains($plat)) {
+            $this->plats->add($plat);
         }
 
         return $this;
@@ -195,7 +195,7 @@ class Menu
 
     public function removePlat(Plat $plat): static
     {
-        $this->Plats->removeElement($plat);
+        $this->plats->removeElement($plat);
 
         return $this;
     }

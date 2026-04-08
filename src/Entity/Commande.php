@@ -79,7 +79,6 @@ class Commande
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->menu = new ArrayCollection();
     }
 

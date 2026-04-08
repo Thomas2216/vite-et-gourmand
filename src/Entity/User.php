@@ -171,23 +171,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, commande>
+     * @return Collection<int, Commande>
      */
     public function getCommandes(): Collection
     {
         return $this->commandes;
     }
 
-    public function addCommande(commande $commande): static
+    public function addCommande(Commande $commande): static
     {
         if (!$this->commandes->contains($commande)) {
             $this->commandes->add($commande);
-            $commande->addUser($this);      }
+            $commande->setUser($this);
+        }
 
         return $this;
     }
 
-    public function removeCommande(commande $commande): static
+    public function removeCommande(Commande $commande): static
     {
         $this->commandes->removeElement($commande);
 
@@ -202,21 +203,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->avis;
     }
 
-    public function addAvi(Avis $avi): static
+    public function addAvis(Avis $avis): static
     {
-        if (!$this->avis->contains($avi)) {
-            $this->avis->add($avi);
-            $avi->setUser($this);
+        if (!$this->avis->contains($avis)) {
+            $this->avis->add($avis);
+            $avis->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeAvi(Avis $avi): static
+    public function removeAvis(Avis $avis): static
     {
-        if ($this->avis->removeElement($avi)) {
-            if ($avi->getUser() === $this) {
-                $avi->setUser(null);
+        if ($this->avis->removeElement($avis)) {
+            if ($avis->getUser() === $this) {
+                $avis->setUser(null);
             }
         }
 
