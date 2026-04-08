@@ -21,7 +21,7 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             Emailfield::new('email'),
-            TextField::new('password', 'Mot de passe'),
+            TextField::new('password', 'Mot de passe')->onlyOnForms(),
             TextField::new('nom'),
             TextField::new('prenom', 'Prénom'),
             TextField::new('adresse', 'Adresse postale'),
