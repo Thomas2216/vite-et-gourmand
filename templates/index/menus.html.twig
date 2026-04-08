@@ -1,59 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des menus{% endblock %}
+{% block title %}Les Menus{% endblock %}
 
 {% block body %}
-    <h1 class="menu-title">Les Menus</h1>
-    <div>
-        <p class="presentation-menu">
-            Chez Vite & Gourmand, nous avons imaginé des menus qui allient rapidité et plaisir. Que vous soyez pressé le midi ou simplement en quête d’un repas savoureux, nos formules sont pensées pour satisfaire toutes les envies.<br>
-            Des ingrédients soigneusement sélectionnés, des recettes gourmandes et des portions généreuses : chaque menu est conçu pour vous offrir un moment de dégustation simple, efficace et délicieux.<br>
-            Découvrez nos différentes formules et laissez-vous tenter… Rapidement bon, délicieusement gourmand ! 🍴✨
+
+    <div class="menus-hero">
+        <h1 class="menus-hero-title">Nos Menus</h1>
+        <p class="menus-hero-text">
+            Chez Vite &amp; Gourmand, nous avons imaginé des menus qui allient rapidité et plaisir.
+            Que vous soyez pressé le midi ou simplement en quête d'un repas savoureux, nos formules
+            sont pensées pour satisfaire toutes les envies.<br>
+            Des ingrédients soigneusement sélectionnés, des recettes gourmandes et des portions
+            généreuses : chaque menu est conçu pour vous offrir un moment de dégustation simple,
+            efficace et délicieux.
         </p>
     </div>
-    <div class="card-menu">
+
+    <div class="menus-grid-wrapper">
         {% if menus|length %}
-            <div class="d-flex flex-wrap justify-content-center">
+            <div class="menus-grid">
                 {% for menu in menus %}
-                    <div class="card-list">
-                        <div class="card">
-                            <!-- Image du menu -->
-                            {% if menu.titre == 'Menu Italien' %}
-                                <img src="{{ asset('images/menu_italien.png') }}" class="card-menu-img" alt="Menu Italien">
-                            {% elseif menu.titre == 'Menu Healthy' %}
-                                <img src="{{ asset('images/menu_healthy.png') }}" class="card-menu-img" alt="Menu Healthy">
-                            {% elseif menu.titre == 'Menu Gourmet' %}
-                                <img src="{{ asset('images/menu_gourmet.png') }}" class="card-menu-img" alt="Menu Gourmet">
-                            {% elseif menu.titre == 'Menu Famille' %}
-                                <img src="{{ asset('images/menu_famille.png') }}" class="card-menu-img" alt="Menu Famille">
-                            {% elseif menu.titre == 'Menu Express' %}
-                                <img src="{{ asset('images/menu_express.png') }}" class="card-menu-img" alt="Menu Express">
+                    <div class="menu-card">
+
+                        {% if menu.titre == 'Menu Italien' %}
+                            <img src="{{ asset('images/menu_italien.png') }}" class="menu-card-img" alt="Menu Italien">
+                        {% elseif menu.titre == 'Menu Healthy' %}
+                            <img src="{{ asset('images/menu_healthy.png') }}" class="menu-card-img" alt="Menu Healthy">
+                        {% elseif menu.titre == 'Menu Gourmet' %}
+                            <img src="{{ asset('images/menu_gourmet.png') }}" class="menu-card-img" alt="Menu Gourmet">
+                        {% elseif menu.titre == 'Menu Famille' %}
+                            <img src="{{ asset('images/menu_famille.png') }}" class="menu-card-img" alt="Menu Famille">
+                        {% elseif menu.titre == 'Menu Express' %}
+                            <img src="{{ asset('images/menu_express.png') }}" class="menu-card-img" alt="Menu Express">
+                        {% endif %}
+
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-title">{{ menu.titre }}</h3>
+                            <p class="menu-card-desc">{{ menu.description|raw }}</p>
+
+                            <div class="menu-card-meta">
+                                <span class="menu-card-meta-item">👥 {{ menu.minPersonne }} pers. min.</span>
+                                <span class="menu-card-meta-item menu-card-price">{{ menu.prixFormate }} € / pers.</span>
+                            </div>
+
+                            {% if menu.regime %}
+                                <span class="menu-card-regime">{{ menu.regime }}</span>
                             {% endif %}
-                            <div class="card-header">
-                                {{menu.titre}}
-                            </div>
-
-                            <div class="card-body">
-
-                                <h5 class="card-title">{{ menu.description|raw}}</h5>
-                                <h5 class="card-title">Personnes minimum : {{ menu.minPersonne }}</h5>
-
-                                <p class="card-text">Prix : {{ menu.prixFormate }} €</p>
-
-                                <hr>
-
-                                <a href="{{ path('app_menu_detail', {'id': menu.id}) }}" class="btn-eco">Voir le détail</a>                                {% if menu.regime != NULL %}
-                                    <p class="card-text">Régime : {{ menu.regime }}
-                                {% endif %}
-
-                                <hr>
-                            </div>
                         </div>
+
+                        <div class="menu-card-footer">
+                            <a href="{{ path('app_menu_detail', {'id': menu.id}) }}" class="menu-card-btn">
+                                Voir le détail
+                            </a>
+                        </div>
+
                     </div>
                 {% endfor %}
             </div>
         {% else %}
-            <p class="text-center mt-4">Aucun Menu disponible pour le moment.</p>
+            <p class="menus-empty">Aucun menu disponible pour le moment.</p>
         {% endif %}
     </div>
 

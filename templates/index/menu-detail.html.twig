@@ -1,40 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail du menu{% endblock %}
+{% block title %}{{ menu.titre }}{% endblock %}
 
 {% block body %}
-    <h1>Détail du {{ menu.titre }}</h1>
 
-    <div class="container mt-5">
+    <div class="detail-hero">
+        <div class="detail-hero-content">
+            <h1 class="detail-hero-title">{{ menu.titre }}</h1>
+            <p class="detail-hero-desc">{{ menu.description|raw }}</p>
+
+            <div class="detail-meta">
+                <div class="detail-meta-tile">
+                    <span class="detail-meta-label">Prix</span>
+                    <span class="detail-meta-value">{{ menu.prixFormate }} € / pers.</span>
+                </div>
+                <div class="detail-meta-tile">
+                    <span class="detail-meta-label">Personnes min.</span>
+                    <span class="detail-meta-value">{{ menu.minPersonne }}</span>
+                </div>
+                <div class="detail-meta-tile">
+                    <span class="detail-meta-label">Thème</span>
+                    <span class="detail-meta-value">{{ menu.theme }}</span>
+                </div>
+                {% if menu.regime %}
+                    <div class="detail-meta-tile">
+                        <span class="detail-meta-label">Régime</span>
+                        <span class="detail-meta-value">{{ menu.regime }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-plats-section">
+
+        <h2 class="detail-plats-title">Composition du menu</h2>
+
         {% if menu.plats|length > 0 %}
-            <table class="table menu-table">
-                <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Nom</th>
-                    <th>Allergène</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="plats-grid">
                 {% for plat in menu.plats %}
-                    <tr>
-                        <td>{{ plat.type }}</td>
-                        <td>{{ plat.nom }}</td>
-                        <td>
-                            {{ plat.allergene ?: '—' }}
-                        </td>
-                    </tr>
+                    <div class="plat-card">
+                        <span class="plat-card-type">{{ plat.type }}</span>
+                        <h3 class="plat-card-nom">{{ plat.nom }}</h3>
+                        {% if plat.allergene %}
+                            <span class="badge-allergene">⚠ {{ plat.allergene }}</span>
+                        {% else %}
+                            <span class="badge-allergene badge-allergene--none">Aucun allergène</span>
+                        {% endif %}
+                    </div>
                 {% endfor %}
-                </tbody>
-            </table>
+            </div>
         {% else %}
-            <p>Aucun plat associé à ce menu.</p>
+            <p class="detail-plats-empty">Aucun plat associé à ce menu.</p>
         {% endif %}
-        <a href="{{ path('app_commande', {'menuId': menu.id}) }}" class="btn btn-primary mt-3">
-            Commander ce menu
-        </a>
 
-        <a href="{{ path('app_menus') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+        <div class="detail-actions">
+            <a href="{{ path('app_commande', {'menuId': menu.id}) }}" class="btn-commander">
+                Commander ce menu
+            </a>
+            <a href="{{ path('app_menus') }}" class="btn-retour">
+                ← Retour aux menus
+            </a>
+        </div>
+
     </div>
 
 {% endblock %}

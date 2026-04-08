@@ -1,66 +1,110 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commande{% endblock %}
+{% block title %}Passer une commande{% endblock %}
 
 {% block body %}
-    <h2>Passer votre commande</h2>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'class': 'cmd-layout'}}) }}
 
-    <div class="body-commande">
+        {# ── COLONNE GAUCHE ───────────────────────────────── #}
+        <div class="cmd-col-left">
 
-        <div>
-            <ul>
-                <li>Nom : {{ app.user.nom }}</li>
-                <li>Prénom : {{ app.user.prenom }}</li>
-                <li>Email : {{ app.user.email }}</li>
-                <li>Téléphone : {{ app.user.telephone }}</li>
-            </ul>
-
-            {{ form_row(form.date_livraison) }}
-            {{ form_row(form.heure_livraison) }}
-            {{ form_row(form.adresse) }}
-            {{ form_row(form.nombre_personnes) }}
-            {{ form_row(form.frais_livraison) }}
-
-            <p id="frais-livraison">Frais de livraison : --</p>
-
-            <select id="liste-menus-a-selectionner">
-                <option value="">-- Choisissez un menu --</option>
-                {% for menu in menus %}
-                    <option value="{{ menu.id }}"
-                        data-min-personne="{{ menu.minPersonne }}"
-                        {% if menuIdPreselect is not null and menu.id == menuIdPreselect %}
-                            selected
-                        {% endif %}>
-                        {{ menu.titre }} ({{ menu.prixFormate }}€)
-                    </option>
-                {% endfor %}
-            </select>
-
-            <button type="button" id="btn-add-item">Ajouter le menu</button>
-
-            {{ form_row(form.submit) }}
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Votre commande</h5>
-
-                <ul id="menu-list"></ul>
-
-                <div id="detail-prix">
-                    <hr>
-                    <p id="sous-total-menus">Sous-total menus : --</p>
-                    <p id="ligne-reduction">Réduction 10% : --</p>
-                    <p id="ligne-frais">Frais de livraison : --</p>
-                    <hr>
-                    <p id="prix-total"><strong>Total : --</strong></p>
+            {# Infos utilisateur #}
+            <div class="cmd-section-card">
+                <h2 class="cmd-section-title">Vos informations</h2>
+                <div class="cmd-user-grid">
+                    <div class="cmd-user-item">
+                        <span class="cmd-user-label">Nom</span>
+                        <span class="cmd-user-value">{{ app.user.nom }}</span>
+                    </div>
+                    <div class="cmd-user-item">
+                        <span class="cmd-user-label">Prénom</span>
+                        <span class="cmd-user-value">{{ app.user.prenom }}</span>
+                    </div>
+                    <div class="cmd-user-item">
+                        <span class="cmd-user-label">Email</span>
+                        <span class="cmd-user-value">{{ app.user.email }}</span>
+                    </div>
+                    <div class="cmd-user-item">
+                        <span class="cmd-user-label">Téléphone</span>
+                        <span class="cmd-user-value">{{ app.user.telephone ?? '—' }}</span>
+                    </div>
                 </div>
             </div>
+
+            {# Formulaire livraison #}
+            <div class="cmd-section-card">
+                <h2 class="cmd-section-title">Livraison</h2>
+
+                {{ form_row(form.date_livraison) }}
+                {{ form_row(form.heure_livraison) }}
+                {{ form_row(form.adresse) }}
+                {{ form_row(form.nombre_personnes) }}
+                {{ form_row(form.frais_livraison) }}
+
+                <p id="frais-livraison" class="cmd-frais-text">Frais de livraison : —</p>
+            </div>
+
+            {# Sélection des menus #}
+            <div class="cmd-section-card">
+                <h2 class="cmd-section-title">Choisissez vos menus</h2>
+
+                {# Select + btn cachés — conservés pour la logique JS de app.js #}
+                <select id="liste-menus-a-selectionner" class="cmd-select-hidden" aria-hidden="true" tabindex="-1">
+                    <option value="">-- Choisissez un menu --</option>
+                    {% for menu in menus %}
+                        <option value="{{ menu.id }}"
+                            data-min-personne="{{ menu.minPersonne }}"
+                            {% if menuIdPreselect is not null and menu.id == menuIdPreselect %}selected{% endif %}>
+                            {{ menu.titre }} ({{ menu.prixFormate }}€)
+                        </option>
+                    {% endfor %}
+                </select>
+                <button type="button" id="btn-add-item" class="cmd-btn-hidden" aria-hidden="true" tabindex="-1">Ajouter</button>
+
+                {# Cards menus cliquables #}
+                <div class="cmd-menus-grid">
+                    {% for menu in menus %}
+                        <div class="cmd-menu-card {% if menuIdPreselect is not null and menu.id == menuIdPreselect %}cmd-menu-card--preselect{% endif %}">
+                            <div class="cmd-menu-card-info">
+                                <span class="cmd-menu-card-titre">{{ menu.titre }}</span>
+                                <span class="cmd-menu-card-prix">{{ menu.prixFormate }} € / pers.</span>
+                                <span class="cmd-menu-card-min">👥 {{ menu.minPersonne }} pers. min.</span>
+                                {% if menu.regime %}
+                                    <span class="cmd-menu-card-regime">{{ menu.regime }}</span>
+                                {% endif %}
+                            </div>
+                            <button type="button"
+                                    class="cmd-menu-add-btn"
+                                    data-menu-id="{{ menu.id }}">
+                                + Ajouter
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
         </div>
 
-    </div>
+        {# ── COLONNE DROITE — RÉCAP STICKY ────────────────── #}
+        <div class="cmd-col-right">
+            <div class="cmd-recap">
+                <h2 class="cmd-recap-title">Votre commande</h2>
+
+                <ul id="menu-list" class="cmd-recap-list"></ul>
+
+                <div id="detail-prix" class="cmd-recap-detail">
+                    <div class="cmd-recap-divider"></div>
+                    <p id="sous-total-menus" class="cmd-recap-line">Sous-total menus : —</p>
+                    <p id="ligne-reduction" class="cmd-recap-line cmd-recap-reduction">Réduction 10 % : —</p>
+                    <p id="ligne-frais" class="cmd-recap-line">Frais de livraison : —</p>
+                    <div class="cmd-recap-divider"></div>
+                    <p id="prix-total" class="cmd-recap-total">Total : —</p>
+                </div>
+
+                {{ form_row(form.submit) }}
+            </div>
+        </div>
 
     {{ form_end(form) }}
 

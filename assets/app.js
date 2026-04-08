@@ -195,4 +195,11 @@ document.addEventListener("turbo:load", () => {
         }
     });
 
+    document.querySelectorAll('.cmd-menu-add-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            selectMenus.value = btn.dataset.menuId;
+            btnAddItem.click();
+        });
+    });
+
 });
