@@ -862,6 +862,104 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Historique commandes */
+
+.commandes-card {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.commandes-empty {
+    color: #888;
+    font-style: italic;
+    margin: 0;
+}
+
+.commandes-table-wrapper {
+    overflow-x: auto;
+}
+
+.commandes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.commandes-table thead tr {
+    background: #f0eaf8;
+    border-bottom: 2px solid #d6c5ec;
+}
+
+.commandes-table th {
+    padding: 10px 14px;
+    text-align: left;
+    color: #5B2D8B;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.commandes-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background 0.15s;
+}
+
+.commandes-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.commandes-table tbody tr:hover {
+    background: #faf7ff;
+}
+
+.commandes-table td {
+    padding: 12px 14px;
+    vertical-align: middle;
+}
+
+.commande-numero {
+    font-weight: 600;
+    color: #5B2D8B;
+    white-space: nowrap;
+}
+
+.commande-prix {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.commande-menu-tag {
+    display: inline-block;
+    background: #f0eaf8;
+    color: #5B2D8B;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 12px;
+    margin: 2px 2px 2px 0;
+}
+
+/* Badges statuts commande */
+
+.badge-statut {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-statut--en_attente                 { background: #fff3cd; color: #856404; }
+.badge-statut--acceptee                   { background: #d1ecf1; color: #0c5460; }
+.badge-statut--en_preparation             { background: #cce5ff; color: #004085; }
+.badge-statut--en_cours_de_livraison      { background: #d4edda; color: #155724; }
+.badge-statut--livree                     { background: #d4edda; color: #155724; }
+.badge-statut--en_attente_retour_materiel { background: #fde8d8; color: #7c3a00; }
+.badge-statut--terminee                   { background: #e2e3e5; color: #383d41; }
+
 /* Fin Page profil utilisateur */
 
 /* Media queries */
