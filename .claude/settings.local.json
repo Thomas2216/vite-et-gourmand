@@ -3,7 +3,8 @@
     "allow": [
       "Bash(grep -E \"\\\\.twig$\")",
       "Bash(php bin/console doctrine:migrations:diff --no-interaction)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(php C:\\\\Env\\\\Workspace\\\\Vite&Gourmand - Copie\\\\bin\\\\console:*)"
     ]
   }
 }

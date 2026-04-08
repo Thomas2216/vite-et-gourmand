@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau mot de passe{% endblock %}
+
+{% block body %}
+    <form method="post" class="connexion-form">
+
+        <h2>Choisissez un nouveau mot de passe</h2>
+
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+
+        <button type="submit">Réinitialiser le mot de passe</button>
+
+    </form>
+{% endblock %}

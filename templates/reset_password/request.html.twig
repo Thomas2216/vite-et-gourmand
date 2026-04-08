@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block body %}
+    <form method="post" class="connexion-form">
+
+        {% for message in app.flashes('reset_password_error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        <h2>Mot de passe oublié ?</h2>
+        <p class="reset-intro">Saisissez votre adresse email. Si un compte existe, vous recevrez un lien de réinitialisation.</p>
+
+        {{ form_row(form.email) }}
+
+        <button type="submit">Envoyer le lien</button>
+
+        <div class="not-yet">
+            <a href="{{ path('app_login') }}">← Retour à la connexion</a>
+        </div>
+    </form>
+{% endblock %}

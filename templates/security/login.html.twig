@@ -35,6 +35,10 @@
                value="{{ csrf_token('authenticate') }}">
 
         <button type="submit">Connexion</button>
+
+        <div style="text-align: center; margin-top: 12px;">
+            <a href="{{ path('app_forgot_password_request') }}" class="reset-link">Mot de passe oublié ?</a>
+        </div>
     </form>
 
     <div class="not-yet">

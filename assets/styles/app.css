@@ -281,6 +281,26 @@ header {
     background: #574bde;
 }
 
+.reset-intro {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.reset-link {
+    color: #6C63FF;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.reset-link:hover {
+    color: #574bde;
+    text-decoration: underline;
+}
+
 .alert {
     background-color: #ffdddd;
     color: #d8000c;
