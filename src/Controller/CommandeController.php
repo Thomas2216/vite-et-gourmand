@@ -6,10 +6,13 @@ use App\Entity\Commande;
 use App\Entity\Menu;
 use App\Form\CommandeType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -17,7 +20,7 @@ final class CommandeController extends AbstractController
 {
     #[Route('/commande', name: 'app_commande', methods: ['GET', 'POST'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function commande(HttpFoundationRequest $request, EntityManagerInterface $em): Response
+    public function commande(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         $commande = new Commande();
         $menus = $em->getRepository(Menu::class)->findAll();
@@ -53,6 +56,19 @@ final class CommandeController extends AbstractController
 
             $commande->setNumeroCommande($commande->getId());
             $em->flush();
+
+            $user = $this->getUser();
+            $mailer->send(
+                (new TemplatedEmail())
+                    ->from(new Address('no-reply@viteetgourmand.fr', 'Vite & Gourmand'))
+                    ->to($user->getEmail())
+                    ->subject('Confirmation de votre commande n°' . $commande->getNumeroCommande())
+                    ->htmlTemplate('emails/commande.html.twig')
+                    ->context([
+                        'commande' => $commande,
+                        'user'     => $user,
+                    ])
+            );
 
             $this->addFlash('success', 'Votre commande n°' . $commande->getNumeroCommande() . ' a bien été enregistrée !');
 

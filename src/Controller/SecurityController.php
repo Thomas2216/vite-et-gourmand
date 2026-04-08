@@ -5,12 +5,15 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -47,7 +50,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/create', name: 'app_create', methods: ['GET', 'POST'])]
-    public function create(HttpFoundationRequest $request, EntityManagerInterface $em): Response
+    public function create(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         // Crée un nouvel utilisateur
         $user = new User();
@@ -72,6 +75,15 @@ class SecurityController extends AbstractController
 
             $em->persist($user);
             $em->flush();
+
+            $mailer->send(
+                (new TemplatedEmail())
+                    ->from(new Address('no-reply@viteetgourmand.fr', 'Vite & Gourmand'))
+                    ->to($user->getEmail())
+                    ->subject('Bienvenue sur Vite & Gourmand !')
+                    ->htmlTemplate('emails/inscription.html.twig')
+                    ->context(['user' => $user])
+            );
 
             return $this->redirectToRoute('app_user');
         }

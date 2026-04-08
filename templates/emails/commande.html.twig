@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de votre commande</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .email-wrapper { max-width: 600px; margin: 30px auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .email-header { background-color: #5B2D8B; color: #fff; padding: 25px 30px; }
+        .email-header h1 { margin: 0; font-size: 20px; }
+        .email-header p { margin: 6px 0 0; font-size: 14px; opacity: 0.85; }
+        .email-body { padding: 30px; }
+        .email-body p { line-height: 1.6; margin: 0 0 16px; }
+        .recap-title { color: #5B2D8B; font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; margin: 24px 0 10px; }
+        .info-grid { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .info-grid td { padding: 9px 12px; font-size: 14px; border-bottom: 1px solid #eee; }
+        .info-grid td:first-child { font-weight: bold; color: #555; width: 45%; }
+        .menus-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .menus-table th { background: #f0eaf8; color: #5B2D8B; padding: 9px 12px; text-align: left; font-size: 13px; }
+        .menus-table td { padding: 9px 12px; font-size: 14px; border-bottom: 1px solid #eee; }
+        .total-row td { font-weight: bold; font-size: 15px; border-top: 2px solid #5B2D8B; border-bottom: none; }
+        .badge { display: inline-block; background: #fff3cd; color: #856404; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .email-footer { background: #f9f9f9; padding: 15px 30px; font-size: 12px; color: #999; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-header">
+            <h1>Commande n°{{ commande.numeroCommande ?? commande.id }} confirmée</h1>
+            <p>Merci pour votre commande, {{ user.prenom }} !</p>
+        </div>
+        <div class="email-body">
+            <p>Bonjour <strong>{{ user.prenom }} {{ user.nom }}</strong>,</p>
+            <p>Nous avons bien reçu votre commande. Voici le récapitulatif :</p>
+
+            <p class="recap-title">Détails de la commande</p>
+            <table class="info-grid">
+                <tr>
+                    <td>Numéro de commande</td>
+                    <td>#{{ commande.numeroCommande ?? commande.id }}</td>
+                </tr>
+                <tr>
+                    <td>Date de commande</td>
+                    <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <td>Date de livraison</td>
+                    <td>{{ commande.dateLivraison|date('d/m/Y') }} à {{ commande.heureLivraison|date('H\\hi') }}</td>
+                </tr>
+                <tr>
+                    <td>Adresse de livraison</td>
+                    <td>{{ commande.adresse }}</td>
+                </tr>
+                <tr>
+                    <td>Nombre de personnes</td>
+                    <td>{{ commande.nombrePersonnes }}</td>
+                </tr>
+                <tr>
+                    <td>Statut</td>
+                    <td><span class="badge">En attente de confirmation</span></td>
+                </tr>
+            </table>
+
+            <p class="recap-title">Menus commandés</p>
+            <table class="menus-table">
+                <thead>
+                    <tr>
+                        <th>Menu</th>
+                        <th style="text-align: right;">Prix / pers.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for menu in commande.menu %}
+                    <tr>
+                        <td>{{ menu.titre }}</td>
+                        <td style="text-align: right;">{{ menu.prixFormate|number_format(2, ',', ' ') }} €</td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="total-row">
+                        <td>Total</td>
+                        <td style="text-align: right;">{{ commande.prixTotal|number_format(2, ',', ' ') }} €</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Vous pouvez suivre l'état de votre commande depuis votre espace personnel.</p>
+        </div>
+        <div class="email-footer">
+            Vite &amp; Gourmand — Cet email a été envoyé automatiquement, merci de ne pas y répondre.
+        </div>
+    </div>
+</body>
+</html>

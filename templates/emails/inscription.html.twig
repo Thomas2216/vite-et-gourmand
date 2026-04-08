@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue sur Vite &amp; Gourmand</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .email-wrapper { max-width: 600px; margin: 30px auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .email-header { background-color: #5B2D8B; color: #fff; padding: 25px 30px; }
+        .email-header h1 { margin: 0; font-size: 20px; }
+        .email-header p { margin: 6px 0 0; font-size: 14px; opacity: 0.85; }
+        .email-body { padding: 30px; }
+        .email-body p { line-height: 1.6; margin: 0 0 16px; }
+        .email-highlight { background: #f0eaf8; border-left: 3px solid #5B2D8B; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 20px 0; }
+        .email-highlight strong { color: #5B2D8B; }
+        .btn { display: inline-block; background: #5B2D8B; color: #fff; padding: 14px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; margin: 10px 0; }
+        .email-footer { background: #f9f9f9; padding: 15px 30px; font-size: 12px; color: #999; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-header">
+            <h1>Bienvenue sur Vite &amp; Gourmand !</h1>
+            <p>Votre compte a bien été créé.</p>
+        </div>
+        <div class="email-body">
+            <p>Bonjour <strong>{{ user.prenom }} {{ user.nom }}</strong>,</p>
+            <p>Nous sommes ravis de vous accueillir sur <strong>Vite &amp; Gourmand</strong>. Votre compte est maintenant actif et vous pouvez dès à présent découvrir nos menus et passer votre première commande.</p>
+
+            <div class="email-highlight">
+                <strong>Votre identifiant de connexion :</strong><br>
+                {{ user.email }}
+            </div>
+
+            <p style="text-align: center;">
+                <a href="{{ url('app_menus') }}" class="btn">Découvrir nos menus</a>
+            </p>
+
+            <p>Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet email.</p>
+        </div>
+        <div class="email-footer">
+            Vite &amp; Gourmand — Cet email a été envoyé automatiquement, merci de ne pas y répondre.
+        </div>
+    </div>
+</body>
+</html>

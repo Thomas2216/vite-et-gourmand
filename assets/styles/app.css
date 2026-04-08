@@ -301,6 +301,15 @@ header {
     text-decoration: underline;
 }
 
+.connexion-form--centered {
+    text-align: center;
+}
+
+.login-forgot {
+    text-align: center;
+    margin-top: 12px;
+}
+
 .alert {
     background-color: #ffdddd;
     color: #d8000c;
