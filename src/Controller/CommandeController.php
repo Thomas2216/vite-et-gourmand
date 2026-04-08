@@ -61,6 +61,22 @@ final class CommandeController extends AbstractController
                 }
             }
 
+            foreach ($commande->getMenu() as $menuItem) {
+                if ($menuItem->getStock() < $nombrePersonnes) {
+                    $this->addFlash('error', sprintf(
+                        'Le menu %s n\'a plus assez de stock disponible.',
+                        $menuItem->getTitre()
+                    ));
+                    return $this->render('index/commande.html.twig', [
+                        'controller_name' => 'CommandeController',
+                        'form'            => $form->createView(),
+                        'menus'           => $menus,
+                        'menuIdPreselect' => $menuIdPreselect,
+                        'ors_key'         => $_ENV['ORS_API_KEY'],
+                    ]);
+                }
+            }
+
             $fraisLivraison = (float) ($form->get('frais_livraison')->getData() ?? 0);
 
             $total = 0;
@@ -84,6 +100,11 @@ final class CommandeController extends AbstractController
             $em->flush();
 
             $commande->setNumeroCommande($commande->getId());
+
+            foreach ($commande->getMenu() as $menuItem) {
+                $menuItem->setStock($menuItem->getStock() - $nombrePersonnes);
+            }
+
             $em->flush();
 
             $user = $this->getUser();
