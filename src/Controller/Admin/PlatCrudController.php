@@ -19,7 +19,7 @@ class PlatCrudController extends AbstractCrudController
         return [
             TextField::new('nom', 'Nom du Plat'),
             TextField::new('type', 'Type'),
-            TextField::new('allergenes', 'Allergenes'),
+            TextField::new('allergene', 'Allergène'),
 
         ];
     }
