@@ -55,6 +55,62 @@
 
         </div>
 
+        <div class="profil-card commandes-card">
+
+            <h2 class="profil-section-title">Mes commandes</h2>
+
+            {% if commandes is empty %}
+                <p class="commandes-empty">Vous n'avez pas encore passé de commande.</p>
+            {% else %}
+                {% set statutLabels = {
+                    'en_attente':                 'En attente',
+                    'acceptee':                   'Acceptée',
+                    'en_preparation':             'En préparation',
+                    'en_cours_de_livraison':      'En cours de livraison',
+                    'livree':                     'Livrée',
+                    'en_attente_retour_materiel': 'En attente retour matériel',
+                    'terminee':                   'Terminée'
+                } %}
+                <div class="commandes-table-wrapper">
+                    <table class="commandes-table">
+                        <thead>
+                            <tr>
+                                <th>N° commande</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                                <th>Menus</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for commande in commandes %}
+                            <tr>
+                                <td class="commande-numero">#{{ commande.numeroCommande ?? commande.id }}</td>
+                                <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
+                                <td>
+                                    <span class="badge-statut badge-statut--{{ commande.statut }}">
+                                        {{ statutLabels[commande.statut] ?? commande.statut }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if commande.menu is empty %}
+                                        <span class="text-muted">—</span>
+                                    {% else %}
+                                        {% for menu in commande.menu %}
+                                            <span class="commande-menu-tag">{{ menu.titre }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                                <td class="commande-prix">{{ commande.prixTotal|number_format(2, ',', ' ') }} €</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+        </div>
+
         {% if app.user.avis|length %}
         <div class="profil-card">
 
