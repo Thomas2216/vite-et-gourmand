@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,7 +51,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/create', name: 'app_create', methods: ['GET', 'POST'])]
-    public function create(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+    public function create(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer, Security $security): Response
     {
         // Crée un nouvel utilisateur
         $user = new User();
@@ -85,7 +86,7 @@ class SecurityController extends AbstractController
                     ->context(['user' => $user])
             );
 
-            return $this->redirectToRoute('app_user');
+            return $security->login($user, UserAuthenticator::class, 'main');
         }
 
         return $this->render('index/create.html.twig', [
