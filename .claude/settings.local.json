@@ -4,7 +4,8 @@
       "Bash(grep -E \"\\\\.twig$\")",
       "Bash(php bin/console doctrine:migrations:diff --no-interaction)",
       "Bash(find:*)",
-      "Bash(php C:\\\\Env\\\\Workspace\\\\Vite&Gourmand - Copie\\\\bin\\\\console:*)"
+      "Bash(php C:\\\\Env\\\\Workspace\\\\Vite&Gourmand - Copie\\\\bin\\\\console:*)",
+      "Bash(php bin/console debug:router)"
     ]
   }
 }
