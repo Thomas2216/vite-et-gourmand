@@ -45,6 +45,19 @@ class CommandeRepository extends ServiceEntityRepository
     /**
      * @return Commande[]
      */
+    public function findAllOrderedByDate(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.user', 'u')
+            ->addSelect('u')
+            ->orderBy('c.date_livraison', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Commande[]
+     */
     public function findByUser(User $user): array
     {
         return $this->createQueryBuilder('c')

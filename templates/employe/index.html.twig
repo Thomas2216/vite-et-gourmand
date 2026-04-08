@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace employé — Commandes{% endblock %}
+
+{% block body %}
+
+<div class="profil-container employe-container">
+
+    <h1 class="profil-title">Espace employé</h1>
+
+    <div class="profil-card commandes-card">
+
+        <h2 class="profil-section-title">Toutes les commandes</h2>
+
+        {% if commandes is empty %}
+            <p class="commandes-empty">Aucune commande enregistrée.</p>
+        {% else %}
+            <div class="commandes-table-wrapper">
+                <table class="commandes-table">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Client</th>
+                            <th>Livraison</th>
+                            <th>Statut actuel</th>
+                            <th>Changer le statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for commande in commandes %}
+                        <tr>
+                            <td class="commande-numero">
+                                #{{ commande.numeroCommande ?? commande.id }}
+                            </td>
+                            <td>
+                                {% if commande.user %}
+                                    {{ commande.user.prenom }} {{ commande.user.nom }}
+                                {% else %}
+                                    <span class="commandes-empty">—</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ commande.dateLivraison|date('d/m/Y') }}</td>
+                            <td>
+                                <span class="badge-statut badge-statut--{{ commande.statut }}">
+                                    {{ statuts|filter(v => v == commande.statut)|keys|first ?? commande.statut }}
+                                </span>
+                            </td>
+                            <td>
+                                <form method="post"
+                                      action="{{ path('app_employe_statut', {'id': commande.id}) }}"
+                                      class="employe-statut-form">
+                                    <select name="statut" class="employe-statut-select">
+                                        {% for label, valeur in statuts %}
+                                            <option value="{{ valeur }}"
+                                                {% if valeur == commande.statut %}selected{% endif %}>
+                                                {{ label }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="employe-statut-btn">Valider</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
