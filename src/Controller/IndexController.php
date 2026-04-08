@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\ContactType;
 use App\Form\EditProfileType;
 use App\Repository\AvisRepository;
+use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,9 +57,13 @@ final class IndexController extends AbstractController
 
     #[Route('/user', name: 'app_user')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function user(): Response
+    public function user(CommandeRepository $commandeRepository): Response
     {
-        return $this->render('index/user.html.twig');
+        $commandes = $commandeRepository->findByUser($this->getUser());
+
+        return $this->render('index/user.html.twig', [
+            'commandes' => $commandes,
+        ]);
     }
 
     #[Route('/user/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
