@@ -31,6 +31,17 @@ final class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if ($commande->getDateLivraison() < new \DateTime('today')) {
+                $this->addFlash('error', 'La date de livraison doit être au moins aujourd\'hui.');
+                return $this->render('index/commande.html.twig', [
+                    'controller_name' => 'CommandeController',
+                    'form'            => $form->createView(),
+                    'menus'           => $menus,
+                    'menuIdPreselect' => $menuIdPreselect,
+                    'ors_key'         => $_ENV['ORS_API_KEY'],
+                ]);
+            }
+
             $nombrePersonnes = $commande->getNombrePersonnes();
             $fraisLivraison = $form->get('frais_livraison')->getData() ?? 0;
 
