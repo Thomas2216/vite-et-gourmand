@@ -72,13 +72,17 @@ class UserAuthenticator extends AbstractAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_EMPLOYE')) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             $url = $this->adminUrlGenerator
                 ->setController(\App\Controller\Admin\UserCrudController::class)
                 ->setAction('index')
                 ->generateUrl();
 
             return new RedirectResponse($url);
+        }
+
+        if ($this->security->isGranted('ROLE_EMPLOYE')) {
+            return new RedirectResponse($this->urlGenerator->generate('app_employe'));
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_user'));

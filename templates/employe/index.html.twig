@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="profil-container employe-container">
+<div class="employe-container">
 
     <h1 class="profil-title">Espace employé</h1>
 
@@ -42,8 +42,7 @@
                             <td>{{ commande.dateLivraison|date('d/m/Y') }}</td>
                             <td>
                                 <span class="badge-statut badge-statut--{{ commande.statut }}">
-                                    {{ statuts|filter(v => v == commande.statut)|keys|first ?? commande.statut }}
-                                </span>
+                                {{ commande.statut|replace({'_': ' '})|capitalize }}                                </span>
                             </td>
                             <td>
                                 <form method="post"
