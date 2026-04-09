@@ -5,7 +5,10 @@
       "Bash(php bin/console doctrine:migrations:diff --no-interaction)",
       "Bash(find:*)",
       "Bash(php C:\\\\Env\\\\Workspace\\\\Vite&Gourmand - Copie\\\\bin\\\\console:*)",
-      "Bash(php bin/console debug:router)"
+      "Bash(php bin/console debug:router)",
+      "Bash(wc -l \"/c/Env/Workspace/Vite&Gourmand - Copie\"/src/Controller/*.php \"/c/Env/Workspace/Vite&Gourmand - Copie\"/src/Entity/*.php)",
+      "Bash(wc:*)",
+      "Bash(grep:*)"
     ]
   }
 }
