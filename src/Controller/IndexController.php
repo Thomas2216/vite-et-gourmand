@@ -141,6 +141,12 @@ final class IndexController extends AbstractController
         ]);
     }
 
+    #[Route('/evenements', name: 'app_evenements', methods: ['GET'])]
+    public function evenements(): Response
+    {
+        return $this->render('index/evenements.html.twig');
+    }
+
     #[Route('/mentions-legales', name: 'app_mentions')]
     public function mentions(): Response
     {

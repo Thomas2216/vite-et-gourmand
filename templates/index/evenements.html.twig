@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Événements — Vite & Gourmand{% endblock %}
+
+{% block body %}
+
+    {# ── HERO IMAGE + OVERLAY ─────────────────────── #}
+    <div class="evenements-hero">
+        <div class="detail-hero-content">
+            <h1 class="detail-hero-title">Prestations Événementielles</h1>
+            <p class="detail-hero-desc">
+                Vite & Gourmand transforme chaque occasion en expérience culinaire inoubliable.
+                Fêtes de fin d'année, célébrations familiales, anniversaires ou repas professionnels —
+                nous proposons des formules clé en main livrées directement chez vous,
+                à Bordeaux et ses alentours.
+            </p>
+            <div class="detail-meta">
+                <div class="detail-meta-tile">
+                    <span class="detail-meta-label">Événements</span>
+                    <span class="detail-meta-value">3 formules</span>
+                </div>
+                <div class="detail-meta-tile">
+                    <span class="detail-meta-label">Zone de livraison</span>
+                    <span class="detail-meta-value">Bordeaux & alentours</span>
+                </div>
+                <div class="detail-meta-tile">
+                    <span class="detail-meta-label">Service</span>
+                    <span class="detail-meta-value">Sur mesure</span>
+                </div>
+                <div class="detail-meta-tile">
+                    <span class="detail-meta-label">Devis</span>
+                    <span class="detail-meta-value">Gratuit</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ── JULIE & JOSÉ ─────────────────────────────── #}
+    <section class="menus-hero">
+        <h2 class="menus-hero-title">Julie & José</h2>
+        <p class="menus-hero-text">
+            Fondateurs de Vite & Gourmand depuis 25 ans, Julie et José ont bâti leur réputation
+            sur une passion commune : faire de chaque repas un moment d'exception.
+            Julie apporte son expertise en cuisine raffinée, soucieuse des produits frais et des saveurs
+            authentiques. José, de son côté, orchestre chaque événement avec rigueur et convivialité,
+            garantissant une organisation sans faille de la commande à la livraison.
+            Ensemble, ils mettent leur savoir-faire bordelais au service de vos plus belles occasions.
+        </p>
+    </section>
+
+    {# ── CARDS ÉVÉNEMENTS ────────────────────────── #}
+    <div class="cards-presentation">
+
+        <div class="card card-accueil">
+            <img src="{{ asset('images/buffet.jpg') }}" class="card-img-top" alt="Fêtes et célébrations">
+            <div class="card-body">
+                <h5 class="card-title">Fêtes et célébrations</h5>
+                <p class="card-text">
+                    Noël, Pâques, fêtes de famille… Nos menus de saison mettent à l'honneur
+                    des produits soigneusement sélectionnés pour sublimer chaque célébration.
+                    Foie gras, volaille festive, agneau de printemps, desserts maison —
+                    laissez-vous servir et profitez pleinement de vos proches.
+                </p>
+                <a href="{{ path('app_menus') }}" class="btn-card btn btn-primary">Voir les menus</a>
+            </div>
+        </div>
+
+        <div class="card card-accueil">
+            <img src="{{ asset('images/plat_appetissant.jpg') }}" class="card-img-top" alt="Anniversaires">
+            <div class="card-body">
+                <h5 class="card-title">Anniversaires</h5>
+                <p class="card-text">
+                    Un anniversaire réussi commence par un repas à la hauteur de l'événement.
+                    Buffets généreux, menus assis, cocktails dinatoires — nos formules s'adaptent
+                    à toutes les tailles de groupes pour que la fête soit totalement mémorable,
+                    du premier toast au dernier dessert.
+                </p>
+                <a href="{{ path('app_contact') }}" class="btn-card btn btn-primary">Nous contacter</a>
+            </div>
+        </div>
+
+        <div class="card card-accueil">
+            <img src="{{ asset('images/livraison.jpg') }}" class="card-img-top" alt="Repas d'entreprise">
+            <div class="card-body">
+                <h5 class="card-title">Repas d'entreprise</h5>
+                <p class="card-text">
+                    Séminaires, déjeuners de travail, pots de départ ou célébrations d'équipe —
+                    Vite & Gourmand assure votre restauration professionnelle avec sérieux et raffinement.
+                    Impressionnez collaborateurs et clients avec une prestation ponctuelle et soignée,
+                    livrée directement sur votre lieu de travail.
+                </p>
+                <a href="{{ path('app_contact') }}" class="btn-card btn btn-primary">Nous contacter</a>
+            </div>
+        </div>
+
+    </div>
+
+    {# ── APPEL À L'ACTION ────────────────────────── #}
+    <div class="evenements-cta">
+        <h2 class="menus-hero-title">Prêt à organiser votre événement ?</h2>
+        <p class="menus-hero-text">
+            Parcourez nos menus disponibles en ligne ou contactez-nous directement
+            pour une prestation sur mesure adaptée à votre occasion.
+        </p>
+        <div class="evenements-cta-buttons">
+            <a href="{{ path('app_menus') }}" class="btn btn-primary">Voir nos menus</a>
+            <a href="{{ path('app_contact') }}" class="btn btn-outline-secondary">Nous contacter</a>
+        </div>
+    </div>
+
+{% endblock %}

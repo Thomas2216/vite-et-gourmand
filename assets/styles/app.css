@@ -1393,6 +1393,52 @@ header {
     color: #fff;
 }
 
+/* ── PAGE ÉVÉNEMENTS ────────────────────────── */
+
+.evenements-hero {
+    background-image: url('../images/buffet.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 60px 40px;
+    border-bottom: 5px solid #9B7BC2;
+}
+
+.evenements-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.evenements-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+.evenements-cta {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.evenements-cta .menus-hero-title {
+    color: #ffffff;
+}
+
+.evenements-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 28px auto 0;
+}
+
 /* ── FLATPICKR THEME ────────────────────────── */
 
 .flatpickr-day.selected,
