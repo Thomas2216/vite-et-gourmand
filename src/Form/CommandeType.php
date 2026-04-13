@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\Commande;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,15 +17,18 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date_livraison')
-            ->add('heure_livraison')
+            ->add('date_livraison', DateType::class, [
+                'label'  => 'Date de livraison',
+                'widget' => 'single_text',
+            ])
+            ->add('heure_livraison', TimeType::class, [
+                'label'  => 'Heure de livraison',
+                'widget' => 'single_text',
+            ])
             ->add('adresse')
             ->add('nombre_personnes', IntegerType::class, [
                 'label' => 'Nombre de personnes',
-                'attr'  => [
-                    'min' => 1,
-                    'id'  => 'nombre-personnes'
-                ]
+                'attr'  => ['min' => 1],
             ])
             ->add('frais_livraison', HiddenType::class, [
                 'mapped' => false,

@@ -2,6 +2,16 @@
 
 {% block title %}Passer une commande{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock %}
+
 {% block body %}
 
     {{ form_start(form, {'attr': {'class': 'cmd-layout'}}) }}
@@ -36,11 +46,46 @@
             <div class="cmd-section-card">
                 <h2 class="cmd-section-title">Livraison</h2>
 
-                {{ form_row(form.date_livraison) }}
-                {{ form_row(form.heure_livraison) }}
+                {# Date de livraison — Flatpickr #}
+                <div class="cmd-field-group">
+                    {{ form_label(form.date_livraison, 'Date de livraison') }}
+                    {{ form_widget(form.date_livraison, {'attr': {
+                        'type': 'text',
+                        'id': 'date-livraison-fp',
+                        'class': 'cmd-form-control',
+                        'autocomplete': 'off',
+                        'placeholder': 'Sélectionner une date',
+                        'readonly': true
+                    }}) }}
+                    {{ form_errors(form.date_livraison) }}
+                </div>
+
+                {# Heure de livraison — select créneaux #}
+                <div class="cmd-field-group">
+                    {{ form_label(form.heure_livraison, 'Heure de livraison') }}
+                    {{ form_widget(form.heure_livraison, {'attr': {
+                        'class': 'cmd-hidden-field',
+                        'id': 'heure-livraison-input'
+                    }}) }}
+                    <select id="heure-livraison-select" class="cmd-form-control">
+                        <option value="">-- Choisir un créneau --</option>
+                        <option value="11:00">11h00</option>
+                        <option value="12:00">12h00</option>
+                        <option value="13:00">13h00</option>
+                        <option value="18:00">18h00</option>
+                        <option value="19:00">19h00</option>
+                        <option value="20:00">20h00</option>
+                        <option value="21:00">21h00</option>
+                    </select>
+                    {{ form_errors(form.heure_livraison) }}
+                </div>
+
                 {{ form_row(form.adresse) }}
-                {{ form_row(form.nombre_personnes) }}
-                {{ form_row(form.frais_livraison) }}
+
+                {# Champ nombre_personnes caché — alimenté dynamiquement par les cards #}
+                {{ form_widget(form.nombre_personnes, {'attr': {'class': 'cmd-hidden-field'}}) }}
+
+                {{ form_widget(form.frais_livraison) }}
 
                 <p id="frais-livraison" class="cmd-frais-text">Frais de livraison : —</p>
             </div>
@@ -74,11 +119,21 @@
                                     <span class="cmd-menu-card-regime">{{ menu.regime }}</span>
                                 {% endif %}
                             </div>
-                            <button type="button"
-                                    class="cmd-menu-add-btn"
-                                    data-menu-id="{{ menu.id }}">
-                                + Ajouter
-                            </button>
+                            <div class="cmd-card-right">
+                                <div class="cmd-card-nb-pers">
+                                    <label class="cmd-card-nb-label" for="personnes-{{ menu.id }}">Nb personnes</label>
+                                    <input type="number" min="1"
+                                           id="personnes-{{ menu.id }}"
+                                           class="cmd-card-personnes"
+                                           data-menu-id="{{ menu.id }}"
+                                           placeholder="{{ menu.minPersonne }}">
+                                </div>
+                                <button type="button"
+                                        class="cmd-menu-add-btn"
+                                        data-menu-id="{{ menu.id }}">
+                                    + Ajouter
+                                </button>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
@@ -106,7 +161,7 @@
             </div>
         </div>
 
-    {{ form_end(form) }}
+    {{ form_end(form)}}
 
     <script>
         const ORS_KEY = "{{ ors_key }}";

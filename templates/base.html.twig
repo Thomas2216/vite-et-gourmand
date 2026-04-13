@@ -48,11 +48,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
                                 </li>
-                            {% elseif is_granted('ROLE_ADMIN')%}
+                            {% elseif is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('admin') }}">Espace Administrateur</a>
                                 </li>
-                            {% elseif is_granted('ROLE_EMPLOYE')%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_stats') }}">Statistiques</a>
+                                </li>
+                            {% elseif is_granted('ROLE_EMPLOYE') %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('app_employe') }}">Espace Employé</a>
                                 </li>
