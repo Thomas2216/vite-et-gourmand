@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Document\CommandeStat;
 use App\Entity\Commande;
 use App\Entity\Menu;
 use App\Form\CommandeType;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +22,7 @@ final class CommandeController extends AbstractController
 {
     #[Route('/commande', name: 'app_commande', methods: ['GET', 'POST'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function commande(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+    public function commande(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer, DocumentManager $dm): Response
     {
         $commande = new Commande();
         $menus = $em->getRepository(Menu::class)->findAll();
@@ -83,7 +85,6 @@ final class CommandeController extends AbstractController
             foreach ($commande->getMenu() as $menu) {
                 $total += $menu->getPrix() * $nombrePersonnes;
 
-                // Réduction 10%
                 if ($nombrePersonnes >= $menu->getMinPersonne() + 5) {
                     $total = $total * 0.90;
                 }
@@ -106,6 +107,27 @@ final class CommandeController extends AbstractController
             }
 
             $em->flush();
+
+            // Enregistrement des stats dans MongoDB
+            $panier = $request->getSession()->get('panier', []);
+
+            try {
+                foreach ($panier as $menuId => $quantite) {
+                    $menuItem = $em->getRepository(Menu::class)->find($menuId);
+                    if ($menuItem) {
+                        $stat = new CommandeStat();
+                        $stat->setMenuTitre($menuItem->getTitre());
+                        $stat->setNombrePersonnes($nombrePersonnes);
+                        $stat->setPrixTotal($menuItem->getPrix() * $nombrePersonnes / 100);
+                        $stat->setPeriode((new \DateTime())->format('Y-m'));
+                        $stat->setDateCommande(new \DateTime());
+                        $dm->persist($stat);
+                    }
+                }
+                $dm->flush();
+            } catch (\Exception $e) {
+                // Log silencieux — MongoDB ne doit pas bloquer la commande
+            }
 
             $user = $this->getUser();
             $mailer->send(
@@ -176,11 +198,11 @@ final class CommandeController extends AbstractController
                 $totalPrix  += $sousTotalMenu;
 
                 $detailPanier[] = [
-                    'menuId'    => $menuId,
-                    'quantite'  => $quantite,
-                    'titre'     => $menu->getTitre(),
-                    'prix'      => $menu->getPrixFormate(),
-                    'sousTotal' => $sousTotalMenu / 100,
+                    'menuId'      => $menuId,
+                    'quantite'    => $quantite,
+                    'titre'       => $menu->getTitre(),
+                    'prix'        => $menu->getPrixFormate(),
+                    'sousTotal'   => $sousTotalMenu / 100,
                     'minPersonne' => $menu->getMinPersonne(),
                 ];
             }

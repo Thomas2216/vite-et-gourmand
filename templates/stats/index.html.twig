@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques des commandes{% endblock %}
+
+{% block body %}
+
+    <div class="profil-container">
+
+        <h1 class="profil-title">Statistiques des commandes</h1>
+
+        <div class="profil-card">
+            <h2 class="profil-section-title">Menus commandés</h2>
+
+            {% if statsByMenu is empty %}
+                <p class="commandes-empty">Aucune statistique disponible.</p>
+            {% else %}
+                <table class="commandes-table">
+                    <thead>
+                    <tr>
+                        <th>Menu</th>
+                        <th>Nombre de commandes</th>
+                        <th>Chiffre d'affaires</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for stat in statsByMenu %}
+                        <tr>
+                            <td>{{ stat.titre }}</td>
+                            <td>{{ stat.total_commandes }}</td>
+                            <td>{{ stat.chiffre_affaires|number_format(2, ',', ' ') }} €</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+{% endblock %}
