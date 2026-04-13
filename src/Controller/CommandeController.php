@@ -46,6 +46,14 @@ final class CommandeController extends AbstractController
 
             $nombrePersonnes = $commande->getNombrePersonnes();
 
+            $panier = $request->getSession()->get('panier', []);
+            foreach ($panier as $menuId => $quantite) {
+                $menuItem = $em->getRepository(Menu::class)->find($menuId);
+                if ($menuItem) {
+                    $commande->addMenu($menuItem);
+                }
+            }
+
             foreach ($commande->getMenu() as $menuItem) {
                 if ($nombrePersonnes < $menuItem->getMinPersonne()) {
                     $this->addFlash('error', sprintf(
@@ -83,7 +91,7 @@ final class CommandeController extends AbstractController
 
             $total = 0;
             foreach ($commande->getMenu() as $menu) {
-                $total += $menu->getPrix() * $nombrePersonnes;
+                $total += ($menu->getPrix() * $nombrePersonnes /100);
 
                 if ($nombrePersonnes >= $menu->getMinPersonne() + 5) {
                     $total = $total * 0.90;
@@ -108,9 +116,6 @@ final class CommandeController extends AbstractController
 
             $em->flush();
 
-            // Enregistrement des stats dans MongoDB
-            $panier = $request->getSession()->get('panier', []);
-
             try {
                 foreach ($panier as $menuId => $quantite) {
                     $menuItem = $em->getRepository(Menu::class)->find($menuId);
@@ -126,8 +131,9 @@ final class CommandeController extends AbstractController
                 }
                 $dm->flush();
             } catch (\Exception $e) {
-                // Log silencieux — MongoDB ne doit pas bloquer la commande
             }
+
+            $request->getSession()->remove('panier');
 
             $user = $this->getUser();
             $mailer->send(

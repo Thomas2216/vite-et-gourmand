@@ -1,10 +1,6 @@
 import "./styles/app.css";
-import "@hotwired/turbo";
-import { startStimulusApp } from "@symfony/stimulus-bundle";
 
-const app = startStimulusApp();
-
-document.addEventListener("turbo:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     const btnAddItem       = document.getElementById("btn-add-item");
     const menuList         = document.getElementById("menu-list");

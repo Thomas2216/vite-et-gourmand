@@ -22,8 +22,7 @@ class MenuCrudController extends AbstractCrudController
         return [
             TextField::new('titre', 'Titre du Menu'),
             TextEditorField::new('description'),
-            MoneyField::new('prix', 'Prix')->setCurrency('EUR'),
-            IntegerField::new('min_personne', 'Personnes minimum'),
+            MoneyField::new('prix', 'Prix')->setCurrency('EUR')->setStoredAsCents(true),            IntegerField::new('min_personne', 'Personnes minimum'),
             IntegerField::new('stock', 'Stock restant'),
             TextField::new('theme', 'Thème'),
             TextField::new('regime', 'Régime Alimentaire'),
