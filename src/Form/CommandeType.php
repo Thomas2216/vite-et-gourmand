@@ -22,8 +22,10 @@ class CommandeType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('heure_livraison', TimeType::class, [
-                'label'  => 'Heure de livraison',
-                'widget' => 'single_text',
+                'widget'   => 'single_text',
+                'label'    => 'Heure de livraison',
+                'required' => false,
+                'input'    => 'datetime',
             ])
             ->add('adresse')
             ->add('nombre_personnes', IntegerType::class, [

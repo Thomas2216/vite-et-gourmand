@@ -47,7 +47,7 @@ class Commande
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date_livraison = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTime $heure_livraison = null;
 
     #[ORM\Column(length: 255)]
@@ -128,7 +128,7 @@ class Commande
         return $this->heure_livraison;
     }
 
-    public function setHeureLivraison(\DateTime $heure_livraison): static
+    public function setHeureLivraison(?\DateTime $heure_livraison): static
     {
         $this->heure_livraison = $heure_livraison;
 

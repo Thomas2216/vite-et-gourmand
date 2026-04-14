@@ -191,7 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Flatpickr — calendrier date de livraison
     const dateFp = document.getElementById('date-livraison-fp');
     if (dateFp && typeof flatpickr !== 'undefined') {
         flatpickr(dateFp, {
@@ -201,8 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Sync select créneaux horaires → input caché Symfony
-    const heureSelect = document.getElementById('heure-livraison-select');
+    const heureSelect = document.getElementById('commande_heure_livraison') || document.getElementById('heure-livraison-select');
     const heureInput  = document.getElementById('heure-livraison-input');
     if (heureSelect && heureInput) {
         heureSelect.addEventListener('change', () => {
@@ -210,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Boutons + Ajouter : sync nb personnes de la card → champ caché, puis déclenche l'ajout
+
     document.querySelectorAll('.cmd-menu-add-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
             const card        = btn.closest('.cmd-menu-card');

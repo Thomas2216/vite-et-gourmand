@@ -54,8 +54,7 @@
                         'id': 'date-livraison-fp',
                         'class': 'cmd-form-control',
                         'autocomplete': 'off',
-                        'placeholder': 'Sélectionner une date',
-                        'readonly': true
+                        'placeholder': 'Sélectionner une date'
                     }}) }}
                     {{ form_errors(form.date_livraison) }}
                 </div>
@@ -63,19 +62,19 @@
                 {# Heure de livraison — select créneaux #}
                 <div class="cmd-field-group">
                     {{ form_label(form.heure_livraison, 'Heure de livraison') }}
-                    {{ form_widget(form.heure_livraison, {'attr': {
+                    {{ form_widget(form.heure_livraison, {'required':false, 'attr': {
                         'class': 'cmd-hidden-field',
                         'id': 'heure-livraison-input'
                     }}) }}
                     <select id="heure-livraison-select" class="cmd-form-control">
                         <option value="">-- Choisir un créneau --</option>
-                        <option value="11:00">11h00</option>
-                        <option value="12:00">12h00</option>
-                        <option value="13:00">13h00</option>
-                        <option value="18:00">18h00</option>
-                        <option value="19:00">19h00</option>
-                        <option value="20:00">20h00</option>
-                        <option value="21:00">21h00</option>
+                        <option value="11:00:00">11h00</option>
+                        <option value="12:00:00">12h00</option>
+                        <option value="13:00:00">13h00</option>
+                        <option value="18:00:00">18h00</option>
+                        <option value="19:00:00">19h00</option>
+                        <option value="20:00:00">20h00</option>
+                        <option value="21:00:00">21h00</option>
                     </select>
                     {{ form_errors(form.heure_livraison) }}
                 </div>
@@ -126,7 +125,7 @@
                                            id="personnes-{{ menu.id }}"
                                            class="cmd-card-personnes"
                                            data-menu-id="{{ menu.id }}"
-                                           placeholder="{{ menu.minPersonne }}">
+                                           placeholder="min {{ menu.minPersonne }}">
                                 </div>
                                 <button type="button"
                                         class="cmd-menu-add-btn"
