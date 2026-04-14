@@ -16,13 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Attribute\Route;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class CommandeController extends AbstractController
 {
     #[Route('/commande', name: 'app_commande', methods: ['GET', 'POST'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function commande(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer, DocumentManager $dm): Response
+    public function commande(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer, DocumentManager $dm, LoggerInterface $logger): Response
     {
         $commande = new Commande();
         $menus = $em->getRepository(Menu::class)->findAll();
@@ -90,12 +91,17 @@ final class CommandeController extends AbstractController
             $fraisLivraison = (float) ($form->get('frais_livraison')->getData() ?? 0);
 
             $total = 0;
+            $reductionApplicable = false;
             foreach ($commande->getMenu() as $menu) {
-                $total += ($menu->getPrix() * $nombrePersonnes /100);
+                $total += ($menu->getPrix() * $nombrePersonnes / 100);
 
                 if ($nombrePersonnes >= $menu->getMinPersonne() + 5) {
-                    $total = $total * 0.90;
+                    $reductionApplicable = true;
                 }
+            }
+
+            if ($reductionApplicable) {
+                $total = $total * 0.90;
             }
 
             $total += $fraisLivraison;
@@ -131,6 +137,7 @@ final class CommandeController extends AbstractController
                 }
                 $dm->flush();
             } catch (\Exception $e) {
+                $logger->error('Erreur MongoDB lors de l\'enregistrement des statistiques : ' . $e->getMessage());
             }
 
             $request->getSession()->remove('panier');

@@ -8,7 +8,9 @@
       "Bash(php bin/console debug:router)",
       "Bash(wc -l \"/c/Env/Workspace/Vite&Gourmand - Copie\"/src/Controller/*.php \"/c/Env/Workspace/Vite&Gourmand - Copie\"/src/Entity/*.php)",
       "Bash(wc:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(ls -la *.json *.yaml)",
+      "Bash(xargs ls:*)"
     ]
   }
 }
