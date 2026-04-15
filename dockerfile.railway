@@ -1,0 +1,31 @@
+FROM php:8.2-fpm
+
+RUN apt-get update && apt-get install -y \
+    nginx \
+    libicu-dev \
+    zip \
+    unzip \
+    git \
+    gettext-base \
+    && docker-php-ext-install pdo pdo_mysql intl opcache \
+    && pecl install mongodb-1.21.0 \
+    && docker-php-ext-enable mongodb \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+COPY . .
+
+RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-req=ext-mongodb
+
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY docker/start.sh /start.sh
+RUN chmod +x /start.sh
+
+EXPOSE ${PORT:-80}
+
+CMD ["/start.sh"]
