@@ -30,4 +30,6 @@ RUN chmod +x /start.sh
 
 EXPOSE ${PORT:-80}
 
+COPY docker/php-fpm.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+
 CMD ["/start.sh"]
