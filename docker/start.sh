@@ -1,5 +1,4 @@
 #!/bin/sh
-sed -i "s/\${PORT}/$PORT/g" /etc/nginx/conf.d/default.conf
 mkdir -p /var/www/html/var/cache/prod
 mkdir -p /var/www/html/var/log
 chmod -R 777 /var/www/html/var

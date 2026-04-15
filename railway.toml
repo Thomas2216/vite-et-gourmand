@@ -1,5 +1,2 @@
 [build]
 dockerfilePath = "Dockerfile.railway"
-
-[deploy]
-startCommand = "/start.sh"
