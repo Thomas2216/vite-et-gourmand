@@ -12,16 +12,10 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-ENV APP_ENV="prod"
-ENV APP_SECRET="a1b2c3d4e5f6g7h8i9j0"
-ENV DATABASE_URL="postgresql://vite_et_gourmand_db_user:WCAM1Tpcfc5DMaPUiOr8Wn7FGtYPnylD@dpg-d7fv34dckfvc73dap1i0-a/vite_et_gourmand_db?serverVersion=16&charset=utf8&sslmode=require"
-
 WORKDIR /app
 COPY . .
 
 RUN composer install --ignore-platform-reqs --no-scripts --optimize-autoloader --no-interaction
-
-RUN echo "" > .env && rm -f .env.local .env.prod .env.local.php
 
 EXPOSE 8080
 
